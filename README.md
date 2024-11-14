@@ -217,3 +217,15 @@ transform2D 一般用于 2D 场景的变换，transform3D 用于 3D 场景的变
 解决方法一：使用 `transform: translate3d(-50%, -50%, 0)`，将元素的变换转换为 3D 变换。这样可以强制浏览器使用更高质量的文本渲染，从而避免字体模糊的问题。
 
 解决方法二：使用 `backface-visibility: hidden` 属性，将元素的背面隐藏起来，这有助于提高字体的清晰度。
+
+#### Transform 导致 z-index 不生效
+
+[元素的层叠上下文、层叠顺序](https://github.com/XieZongChen/review-notes/blob/main/CSS.mm.md#%E5%85%83%E7%B4%A0%E7%9A%84%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B1%82%E5%8F%A0%E9%A1%BA%E5%BA%8F)
+
+transform 属性会导致子元素的 z-index 失效的原因是：transform 属性会创建一个新的渲染上下文，这个新的上下文会将元素的层叠上下文分离出去，从而导致原来上下文中 z-index 属性失效。除此之外，比如 `perspective`、`isolation` 等属性都会导致此问题。
+
+解决方法一：更改 HTML 结构，将需要较高 z-index 的子元素移出应用了 transform 属性的父元素
+
+解决方法二：避免使用创建新的上下文的属性
+
+解决方法三：给父容器添加更高层级的 z-index
