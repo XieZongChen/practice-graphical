@@ -247,28 +247,28 @@ Transform 的矩阵（matrix）使 CSS 有了处理三维场景的能力。
   - 接收十六个参数，构成一个 4 x 4 的矩阵，用于处理三维空间中的变换，包括平面变换所有功能以及深度方向的缩放、旋转和位移
   - 支持设置透视效果，这是 3D 变换的一个重要特性。matrix3d 的最后一行四个数与透视相关
 
-> **矩阵变换的数学基础**
-> 在数学上，矩阵变换是通过矩阵乘法实现的。对于 2D 变换，`matrix(a, b, c, d, e, f)` 可以表示为：
-> \[
-> \begin{bmatrix}
-> a & c & e \\
-> b & d & f \\
-> 0 & 0 & 1
-> \end{bmatrix}
-> \]
-> 这个矩阵接受一个 2D 向量 \((x, y)\) 并输出一个新的向量 \((x', y')\)：
-> \[
-> \begin{bmatrix}
-> x' \\ y' \\ 1
-> \end{bmatrix}
-> \begin{bmatrix}
-> a & c & e \\
-> b & d & f \\
-> 0 & 0 & 1
-> \end{bmatrix}
-> \begin{bmatrix}
-> x \\
-> y \\
-> 1
-> \end{bmatrix}
-> \]
+**矩阵变换的数学基础**：
+在数学上，矩阵变换是通过矩阵乘法实现的。对于 2D 变换，`matrix(a, b, c, d, e, f)` 可以表示为：
+\[
+\begin{bmatrix}
+a & c & e \\
+b & d & f \\
+0 & 0 & 1
+\end{bmatrix}
+\]
+这个矩阵接受一个 2D 向量 \((x, y)\) 并输出一个新的向量 \((x', y')\)：
+\[
+\begin{bmatrix}
+ x' \\ y' \\ 1
+ \end{bmatrix}
+ \begin{bmatrix}
+ a & c & e \\
+b & d & f \\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+ x \\
+ y \\
+ 1
+\end{bmatrix}
+\]
