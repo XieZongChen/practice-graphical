@@ -259,16 +259,16 @@ b & d & f \\
 这个矩阵接受一个 2D 向量 \((x, y)\) 并输出一个新的向量 \((x', y')\)：
 \[
 \begin{bmatrix}
- x' \\ y' \\ 1
- \end{bmatrix}
- \begin{bmatrix}
- a & c & e \\
+x' \\ y' \\ 1
+\end{bmatrix}
+\begin{bmatrix}
+a & c & e \\
 b & d & f \\
 0 & 0 & 1
 \end{bmatrix}
 \begin{bmatrix}
- x \\
- y \\
- 1
+x \\
+y \\
+1
 \end{bmatrix}
 \]
