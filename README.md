@@ -232,17 +232,15 @@ transform 属性会导致子元素的 z-index 失效的原因是：transform 属
 
 #### Transform 的矩阵变换
 
+> 注：本节部分参考 [理解 CSS3 transform 中的 Matrix](https://www.zhangxinxu.com/wordpress/2012/06/css3-transform-matrix-%E7%9F%A9%E9%98%B5/)
+
 Transform 的其他属性 —— **斜拉（`skew`）、缩放（`scale`）、旋转（`rotate`）以及位移（`translate`）背后的运行原理都是用 `matrix` 实现的**，不同属性修改 matrix 对应的几个参数的值。
 
 Transform 的变换都是基于其 **坐标系统** 的，坐标系统的原点是 `transform-origin` 属性设定的点，默认为目标节点的中心点。
 
 `matrix` 是用于应用仿射变换的函数。它可以将输入的参数转化成一个矩阵。
 
-`transform: matrix(a, b, c, d, e, f)` 可以将其理解为：将目标节点的原始状态与 `matrix` 接收参数后生成的矩阵相乘，最后得到的矩阵就是节点变换后的状态。
-
-**矩阵变换的数学基础**：
-
-在数学上，矩阵变换是通过矩阵乘法实现的。对于 2D 变换，`matrix(a, b, c, d, e, f)` 可以表示为：
+`matrix(a, b, c, d, e, f)` 可以表示为：
 
 \[
 \begin{bmatrix}
@@ -252,20 +250,38 @@ b & d & f \\
 \end{bmatrix}
 \]
 
+`transform: matrix(a, b, c, d, e, f)` 可以将其理解为：将目标节点的原始状态与 `matrix` 接收参数后生成的矩阵相乘，最后得到的矩阵就是节点变换后的状态。
+
 这个矩阵接受一个 2D 向量 \((x, y)\) 并输出一个新的向量 \((x', y')\)：
 
 \[
 \begin{bmatrix}
-x \\ y \\ 1
-\end{bmatrix}
-\begin{bmatrix} 
-a & c & e \\ 
-b & d & f \\ 
+a & c & e \\
+b & d & f \\
 0 & 0 & 1
-\end{bmatrix} = 
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x \\ y \\ 1
+\end{bmatrix} =
 \begin{bmatrix}
 x' \\y' \\1
 \end{bmatrix}
+\]
+
+\[
+\begin{bmatrix}
+a & c & e \\  
+b & d & f \\  
+0 & 0 & 1  
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x \\y \\1
+\end{bmatrix} =
+\begin{bmatrix}
+a x+c y+e \\
+b x+d y+f \\
+0+0+1
+\end{bmatrix}  
 \]
 
 **Transform 可以使用的矩阵有两种**：
@@ -278,5 +294,3 @@ x' \\y' \\1
   - 除了包含 matrix 的所有功能外，还能处理三维空间中的变换
   - 接收十六个参数，构成一个 4 x 4 的矩阵，用于处理三维空间中的变换，包括平面变换所有功能以及深度方向的缩放、旋转和位移
   - 支持设置透视效果，这是 3D 变换的一个重要特性。matrix3d 的最后一行四个数与透视相关
-
-
