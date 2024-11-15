@@ -232,7 +232,9 @@ transform 属性会导致子元素的 z-index 失效的原因是：transform 属
 
 #### Transform 的矩阵变换
 
-Transform 的矩阵（matrix）使 CSS 有了处理三维场景的能力。
+Transform 的其他属性 —— **斜拉（`skew`）、缩放（`scale`）、旋转（`rotate`）以及位移（`translate`）背后的运行原理都是用 `matrix` 实现的**，不同属性修改 matrix 对应的几个参数的值。
+
+Transform 的变换都是基于其 **坐标系统** 的，坐标系统的原点是 `transform-origin` 属性设定的点，默认为目标节点的中心点。
 
 `matrix` 是用于应用仿射变换的函数。它可以将输入的参数转化成一个矩阵。
 
