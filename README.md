@@ -343,4 +343,10 @@ bx + dy + f \\
 
 所以 `matrix(s1, 0, 0, s2, 0, 0)` 套用之前的公式后：`x' = ax + cy + e = s1*x + 0*y + 0 = s1*x`、`y' = bx + dy + f = 0*x + s2*y + 0 = s2*y`。这个操作等效于 `scale(s1, s2)`。
 
+##### 矩阵旋转操作
 
+矩阵的旋转操作要比平移和缩放复杂很多，需要用到三角函数的 `cos` 和 `sin`。
+
+设需要旋转的角度为 `θ`，`matrix` 的选择则写为 `matrix(cosθ, sinθ, -sinθ, cosθ, 0, 0)`，结合矩阵公式后：`x' = x*cosθ - y*sinθ + 0 = x*cosθ - y*sinθ`、`y' = x*sinθ + y*cosθ + 0 = x*sinθ + y*cosθ`。这个操作等效于 `rotate(θdeg)`。
+
+注意，`rotate(θdeg)` 中，参数是**无需计算**，例如旋转 30° 写为：`transform:rotate(30deg);`。而 `matrix` 的参数是要**传入值**的，也就是说需要计算出传入的 `cos`、`sin` 值：`transform: matrix(0.866025,0.500000,-0.500000,0.866025,0,0);`。**而在 Sass、Less 等 CSS 预处理器中，有提供包括 `cos`、`sin` 的数学函数帮助计算**。
