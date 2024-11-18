@@ -348,6 +348,14 @@ bx + dy + f \\
 
 矩阵的旋转操作要比平移和缩放复杂很多，需要用到三角函数的 `cos` 和 `sin`。
 
-设需要旋转的角度为 `θ`，`matrix` 的选择则写为 `matrix(cosθ, sinθ, -sinθ, cosθ, 0, 0)`，结合矩阵公式后：`x' = x*cosθ - y*sinθ + 0 = x*cosθ - y*sinθ`、`y' = x*sinθ + y*cosθ + 0 = x*sinθ + y*cosθ`。这个操作等效于 `rotate(θdeg)`。
+设需要旋转的角度为 `θ`，`matrix` 的参数则写为：`matrix(cosθ, sinθ, -sinθ, cosθ, 0, 0)`。结合矩阵公式后：`x' = x*cosθ - y*sinθ + 0 = x*cosθ - y*sinθ`、`y' = x*sinθ + y*cosθ + 0 = x*sinθ + y*cosθ`。这个操作等效于 `rotate(θdeg)`。
 
-注意，`rotate(θdeg)` 中，参数是**无需计算**，例如旋转 30° 写为：`transform:rotate(30deg);`。而 `matrix` 的参数是要**传入值**的，也就是说需要计算出传入的 `cos`、`sin` 值：`transform: matrix(0.866025,0.500000,-0.500000,0.866025,0,0);`。**而在 Sass、Less 等 CSS 预处理器中，有提供包括 `cos`、`sin` 的数学函数帮助计算**。
+**注意**，`rotate(θdeg)` 中，参数是**无需计算**，例如旋转 30° 写为：`transform:rotate(30deg);`。而 `matrix` 的参数是要**传入值**的，也就是说需要计算出传入的 `cos`、`sin` 值：`transform: matrix(0.866025,0.500000,-0.500000,0.866025,0,0);`。**而在 Sass、Less 等 CSS 预处理器中，有提供包括 `cos`、`sin` 的数学函数帮助计算**。
+
+##### 矩阵拉伸操作
+
+矩阵的旋转操作需要用到三角函数 `tan`。
+
+设需要旋转的角度为 `θ`，`matrix` 的参数则写为：`matrix(1, tan(θ2), tan(θ1), 1, 0, 0)`，`θ2` 为 y 轴倾斜角度，`θ1` 为 x 轴倾斜角度。结合矩阵公式后：`x' = x + y*tan(θ1) + 0 = x + y*tan(θ1)`、`y' = x*tan(θ2) + y + 0 = x*tan(θ2) + y`。这个操作等效于 `skew(θ1deg, θ2deg)`。
+
+这里 `matrix` 和 `skew` 的参数也同旋转操作中提到的一样，前者需要传值，后者只需要传角度。
