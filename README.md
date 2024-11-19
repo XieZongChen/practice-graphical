@@ -379,32 +379,32 @@ transform: matrix3d(
 
 写作矩阵为：
 
-\[
+$$
 \begin{bmatrix}
-a1 & a2 & a3 & a4 \\
-b1 & b2 & b3 & b4 \\
-c1 & c2 & c3 & c4 \\
-d1 & d2 & d3 & d4
+a_1 & a_2 & a_3 & a_4 \\
+b_1 & b_2 & b_3 & b_4 \\
+c_1 & c_2 & c_3 & c_4 \\
+d_1 & d_2 & d_3 & d_4
 \end{bmatrix}
-\]
+$$
 
 矩阵计算方式：
 
 $$
 \begin{bmatrix}
-a1 & a2 & a3 & a4 \\
-b1 & b2 & b3 & b4 \\
-c1 & c2 & c3 & c4 \\
-d1 & d2 & d3 & d4
+a_1 & a_2 & a_3 & a_4 \\
+b_1 & b_2 & b_3 & b_4 \\
+c_1 & c_2 & c_3 & c_4 \\
+d_1 & d_2 & d_3 & d_4
 \end{bmatrix} \cdot
 \begin{bmatrix}
 x \\ y \\ z \\ w
 \end{bmatrix} =
 \begin{bmatrix}
-a1⋅x + a2⋅y + a3⋅z + a4⋅w \\
-b1⋅x + b2⋅y + b3⋅z + b4⋅w \\
-c1⋅x + c2⋅y + c3⋅z + c4⋅w \\
-d1⋅x + d2⋅y + d3⋅z + d4⋅w
+a_1x + a_2y + a_3z + a_4w \\
+b_1x + b_2y + b_3z + b_4w \\
+c_1x + c_2y + c_3z + c_4w \\
+d_1x + d_2y + d_3z + d_4w
 \end{bmatrix} =
 \begin{bmatrix}
 x' \\ y' \\ z' \\ w'
