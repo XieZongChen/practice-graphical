@@ -273,7 +273,9 @@ b & d & f \\
 x \\ y \\ 1
 \end{bmatrix} =
 \begin{bmatrix}
-x' \\y' \\1
+x' \\
+y' \\
+1
 \end{bmatrix}
 $$
 
@@ -323,7 +325,7 @@ b & d & f \\
 0 & 0 & 1
 \end{bmatrix} \cdot
 \begin{bmatrix}
-x \\y \\1
+x \\ y \\ 1
 \end{bmatrix} =
 \begin{bmatrix}
 ax + cy + e \\
