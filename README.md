@@ -390,7 +390,7 @@ d1 & d2 & d3 & d4
 
 矩阵计算方式：
 
-\[
+$$
 \begin{bmatrix}
 a1 & a2 & a3 & a4 \\
 b1 & b2 & b3 & b4 \\
@@ -409,4 +409,10 @@ d1⋅x + d2⋅y + d3⋅z + d4⋅w
 \begin{bmatrix}
 x' \\ y' \\ z' \\ w'
 \end{bmatrix}
-\]
+$$
+
+**与二维相比，三维在渲染前还需透视投影的计算：**
+
+$$
+x_{\text {screen }}=\frac{x^{\prime}}{w^{\prime}}, \quad y_{\text {screen }}=\frac{y^{\prime}}{w^{\prime}}, \quad z_{\text {screen }}=\frac{z^{\prime}}{w^{\prime}}
+$$
