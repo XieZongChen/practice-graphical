@@ -388,7 +388,7 @@ d1 & d2 & d3 & d4
 \end{bmatrix}
 \]
 
-计算方式：
+矩阵计算方式：
 
 \[
 \begin{bmatrix}
@@ -398,12 +398,15 @@ c1 & c2 & c3 & c4 \\
 d1 & d2 & d3 & d4
 \end{bmatrix} \cdot
 \begin{bmatrix}
-x \\ y \\ z \\ 1
+x \\ y \\ z \\ w
 \end{bmatrix} =
 \begin{bmatrix}
-a1 & a2 & a3 & a4 \\
-b1 & b2 & b3 & b4 \\
-c1 & c2 & c3 & c4 \\
-d1 & d2 & d3 & d4
-\end{bmatrix} 
+a1⋅x + a2⋅y + a3⋅z + a4⋅w \\
+b1⋅x + b2⋅y + b3⋅z + b4⋅w \\
+c1⋅x + c2⋅y + c3⋅z + c4⋅w \\
+d1⋅x + d2⋅y + d3⋅z + d4⋅w
+\end{bmatrix} =
+\begin{bmatrix}
+x' \\ y' \\ z' \\ w'
+\end{bmatrix}
 \]
