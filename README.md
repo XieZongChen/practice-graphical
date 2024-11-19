@@ -270,7 +270,9 @@ b & d & f \\
 0 & 0 & 1
 \end{bmatrix} \cdot
 \begin{bmatrix}
-x \\ y \\ 1
+x \\
+y \\
+1
 \end{bmatrix} =
 \begin{bmatrix}
 x' \\
@@ -288,7 +290,9 @@ b & d & f \\
 0 & 0 & 1
 \end{bmatrix} \cdot
 \begin{bmatrix}
-x \\y \\1
+x \\
+y \\
+1
 \end{bmatrix} =
 \begin{bmatrix}
 ax + cy + e \\
@@ -325,7 +329,9 @@ b & d & f \\
 0 & 0 & 1
 \end{bmatrix} \cdot
 \begin{bmatrix}
-x \\ y \\ 1
+x \\
+y \\
+1
 \end{bmatrix} =
 \begin{bmatrix}
 ax + cy + e \\
@@ -400,7 +406,10 @@ c_1 & c_2 & c_3 & c_4 \\
 d_1 & d_2 & d_3 & d_4
 \end{bmatrix} \cdot
 \begin{bmatrix}
-x \\ y \\ z \\ w
+x \\
+y \\
+z \\
+w
 \end{bmatrix} =
 \begin{bmatrix}
 a_1x + a_2y + a_3z + a_4w \\
@@ -409,7 +418,10 @@ c_1x + c_2y + c_3z + c_4w \\
 d_1x + d_2y + d_3z + d_4w
 \end{bmatrix} =
 \begin{bmatrix}
-x' \\ y' \\ z' \\ w'
+x' \\
+y' \\
+z' \\
+w'
 \end{bmatrix}
 $$
 
