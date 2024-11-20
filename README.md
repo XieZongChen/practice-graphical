@@ -428,8 +428,8 @@ $$
 **与二维相比，三维在渲染前还需透视投影的计算（归一化）：**
 
 $$
-x_{\text {screen}}=\frac{x^{\prime}}{w^{\prime}}, \quad 
-y_{\text {screen}}=\frac{y^{\prime}}{w^{\prime}}, \quad 
+x_{\text {screen}}=\frac{x^{\prime}}{w^{\prime}}, \quad
+y_{\text {screen}}=\frac{y^{\prime}}{w^{\prime}}, \quad
 z_{\text {screen}}=\frac{z^{\prime}}{w^{\prime}}
 $$
 
@@ -493,7 +493,15 @@ $$
 透视归一化：
 
 $$
-x_{\text {final}}=\frac{x^{\prime}}{w^{\prime}}=\frac{x}{1-0.002z}, \quad 
-y_{\text {final}}=\frac{y^{\prime}}{w^{\prime}}=\frac{y}{1-0.002z}, \quad 
+x_{\text {final}}=\frac{x^{\prime}}{w^{\prime}}=\frac{x}{1-0.002z}, \quad
+y_{\text {final}}=\frac{y^{\prime}}{w^{\prime}}=\frac{y}{1-0.002z}, \quad
 z_{\text {final}}=\frac{z^{\prime}}{w^{\prime}}=\frac{z}{1-0.002z}
 $$
+
+**归一化** 深度值 $z_{\text {final}}$ 是为了映射点的深度范围到标准化的区间内。不同的 3D 图形 API（如 OpenGL 或 DirectX）可能会使用不同的深度范围。OpenGL 默认深度范围是 [−1, 1]，DirectX、WebGL 默认深度范围是 [0, 1]。
+
+归一化深度值 $z_{\text {final}}$ 的用途：
+
+1. **深度缓冲区（z-buffer）写入**：归一化后，深度值可以方便地存储在深度缓冲区中，记录当前像素的最近深度
+2. **深度测试（Depth Test）**：当新像素与已有像素重叠时，比较新像素的 $z_{\text {final}}$ 值与深度缓冲区中的值。如果新像素更近（$z_{\text {final}}$ 更小），覆盖已有像素；否则，保留已有像素，丢弃新像素
+3. **透明度排序**：在处理半透明物体时，渲染引擎需要根据深度值对物体排序，确保透明物体从后到前依次绘制
