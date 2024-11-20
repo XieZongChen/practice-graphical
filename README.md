@@ -428,7 +428,9 @@ $$
 **与二维相比，三维在渲染前还需透视投影的计算（归一化）：**
 
 $$
-x_{\text {screen }}=\frac{x^{\prime}}{w^{\prime}}, \quad y_{\text {screen }}=\frac{y^{\prime}}{w^{\prime}}, \quad z_{\text {screen }}=\frac{z^{\prime}}{w^{\prime}}
+x_{\text {screen}}=\frac{x^{\prime}}{w^{\prime}}, \quad 
+y_{\text {screen}}=\frac{y^{\prime}}{w^{\prime}}, \quad 
+z_{\text {screen}}=\frac{z^{\prime}}{w^{\prime}}
 $$
 
 ##### 矩阵的透视操作
@@ -461,5 +463,37 @@ transform: matrix3d(
 );
 ```
 
+计算过程：
 
+$$
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & -0.002 \\
+0 & 0 & 0 & 1
+\end{bmatrix} \cdot\begin{bmatrix}
+x \\
+y \\
+z \\
+1
+\end{bmatrix}=\begin{bmatrix}
+x \\
+y \\
+z \\
+z \cdot(-0.002)+1
+\end{bmatrix} =
+\begin{bmatrix}
+x^{\prime} \\
+y^{\prime} \\
+z^{\prime} \\
+w^{\prime}
+\end{bmatrix}
+$$
 
+透视归一化：
+
+$$
+x_{\text {final}}=\frac{x^{\prime}}{w^{\prime}}=\frac{x}{1-0.002z}, \quad 
+y_{\text {final}}=\frac{y^{\prime}}{w^{\prime}}=\frac{y}{1-0.002z}, \quad 
+z_{\text {final}}=\frac{z^{\prime}}{w^{\prime}}=\frac{z}{1-0.002z}
+$$
