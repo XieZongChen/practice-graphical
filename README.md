@@ -425,8 +425,41 @@ w'
 \end{bmatrix}
 $$
 
-**与二维相比，三维在渲染前还需透视投影的计算：**
+**与二维相比，三维在渲染前还需透视投影的计算（归一化）：**
 
 $$
 x_{\text {screen }}=\frac{x^{\prime}}{w^{\prime}}, \quad y_{\text {screen }}=\frac{y^{\prime}}{w^{\prime}}, \quad z_{\text {screen }}=\frac{z^{\prime}}{w^{\prime}}
 $$
+
+##### 矩阵的透视操作
+
+透视本质上是将三维空间中的点投影到二维平面上的操作。其矩阵定义为：
+
+$$
+\mathbf{P}= \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & -1 / d \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+其中：
+
+- 𝑑 是透视距离。
+- 变换后坐标需要通过齐次坐标 𝑤′ 的归一化完成映射。
+- 这个变换等效于 `perspective(𝑑)`
+
+假设需要对三维坐标为 (x, y, z, 1) 的点进行 500px 的透视设置，可以使用 `transform: perspective(500px)` 来设置。而使用 `matrix3d` 则：
+
+```
+transform: matrix3d(
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, -0.002, // -1/500 = -0.002
+    0, 0, 0, 1
+);
+```
+
+
+
