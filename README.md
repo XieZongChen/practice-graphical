@@ -562,6 +562,6 @@ $$
 
 #### 实现一个带透视的立方体
 
-[实现代码]()
+[实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/cube.html)
 
 [效果](https://xiezongchen.github.io/practice-graphical/cube)
