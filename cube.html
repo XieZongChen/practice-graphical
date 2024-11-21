@@ -1,0 +1,64 @@
+<style>
+  .cube {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    left: 200px;
+    top: 200px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(45deg) rotateY(45deg);
+  }
+
+  .square {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    opacity: 0.8;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 400px;
+    font-size: 48px;
+  }
+
+  .front {
+    background-color: red;
+    transform: translateZ(200px);
+  }
+
+  .back {
+    background-color: blue;
+    /* 注意，背面需要面朝外，所以要旋转 180° */
+    transform: translateZ(-200px) rotateY(180deg);
+  }
+
+  .left {
+    background-color: green;
+    transform: translateX(-200px) rotateY(-90deg);
+  }
+
+  .right {
+    background-color: yellow;
+    transform: translateX(200px) rotateY(90deg);
+  }
+
+  .top {
+    background-color: orange;
+    transform: translateY(-200px) rotateX(90deg);
+  }
+
+  .bottom {
+    background-color: purple;
+    transform: translateY(200px) rotateX(-90deg);
+  }
+</style>
+
+<body>
+  <div class="cube">
+    <div class="square front">Front</div>
+    <div class="square back">Back</div>
+    <div class="square left">Left</div>
+    <div class="square right">Right</div>
+    <div class="square top">Top</div>
+    <div class="square bottom">Bottom</div>
+  </div>
+</body>
