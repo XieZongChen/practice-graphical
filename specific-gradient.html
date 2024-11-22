@@ -6,8 +6,8 @@
   }
 
   .box {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
   }
 
   .diffuse-gradient {
@@ -28,6 +28,30 @@
   .diffuse-4 {
     background: radial-gradient(circle at 100%, black, white);
   }
+
+  /* 组合径向渐变 */
+  .combined-gradient {
+    background: repeating-radial-gradient(
+        circle,
+        hsla(27, 100%, 62%, 0.936) 0px 35px,
+        transparent 35px 70px
+      ),
+      radial-gradient(
+        at top right,
+        hsla(1, 99%, 49%, 0.951),
+        hsl(200, 80%, 40%, 0)
+      ),
+      radial-gradient(
+        circle at 0% 50%,
+        hsl(59, 98%, 51%),
+        hsl(200, 90%, 30%, 0)
+      ),
+      radial-gradient(
+        circle at bottom center,
+        hsl(0, 100%, 50%),
+        hsl(30, 70%, 70%, 0)
+      );
+  }
 </style>
 <div class="content">
   <div class="diffuse-gradient">
@@ -36,4 +60,5 @@
     <div class="box diffuse-3"></div>
     <div class="box diffuse-4"></div>
   </div>
+  <div class="box combined-gradient"></div>
 </div>
