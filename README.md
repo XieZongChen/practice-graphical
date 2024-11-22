@@ -61,6 +61,8 @@ css 的 `filter` 的属性有：`blur()` 模糊度、`brightness()` 明度、`co
 
 #### 实现一个带透视的立方体
 
-[实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/cube.html)
+[效果](https://xiezongchen.github.io/practice-graphical/cube) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/cube.html)
 
-[效果](https://xiezongchen.github.io/practice-graphical/cube)
+#### Gradient 渐变练习
+
+- [重复渐变与进度条](https://xiezongchen.github.io/practice-graphical/progress) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/progress.html)
