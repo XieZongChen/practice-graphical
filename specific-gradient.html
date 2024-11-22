@@ -1,0 +1,39 @@
+<style>
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .box {
+    width: 100px;
+    height: 100px;
+  }
+
+  .diffuse-gradient {
+    display: flex;
+    gap: 10px;
+  }
+
+  /* 不同形状和中心的扩散渐变 */
+  .diffuse-1 {
+    background: radial-gradient(ellipse, black, white);
+  }
+  .diffuse-2 {
+    background: radial-gradient(circle, black, white);
+  }
+  .diffuse-3 {
+    background: radial-gradient(circle at top left, black, white);
+  }
+  .diffuse-4 {
+    background: radial-gradient(circle at 100%, black, white);
+  }
+</style>
+<div class="content">
+  <div class="diffuse-gradient">
+    <div class="box diffuse-1"></div>
+    <div class="box diffuse-2"></div>
+    <div class="box diffuse-3"></div>
+    <div class="box diffuse-4"></div>
+  </div>
+</div>
