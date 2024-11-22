@@ -66,3 +66,5 @@ css 的 `filter` 的属性有：`blur()` 模糊度、`brightness()` 明度、`co
 #### Gradient 渐变练习
 
 - [重复渐变与进度条](https://xiezongchen.github.io/practice-graphical/progress) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/progress.html)
+
+- [特殊渐变练习](https://xiezongchen.github.io/practice-graphical/specific-gradient) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/specific-gradient.html)
