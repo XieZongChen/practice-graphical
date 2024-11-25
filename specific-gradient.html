@@ -52,6 +52,17 @@
         hsl(30, 70%, 70%, 0)
       );
   }
+
+  /* 圆锥渐变 */
+  .cone-gradient {
+    background: conic-gradient(
+      red 0 120deg,
+      yellow 120deg 240deg,
+      green 240deg 0deg
+    );
+    background-image: conic-gradient(red, yellow, green);
+  }
+  
 </style>
 <div class="content">
   <div class="diffuse-gradient">
@@ -61,4 +72,5 @@
     <div class="box diffuse-4"></div>
   </div>
   <div class="box combined-gradient"></div>
+  <div class="box cone-gradient"></div>
 </div>
