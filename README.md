@@ -63,6 +63,20 @@ css 的 `filter` 的属性有：`blur()` 模糊度、`brightness()` 明度、`co
 - `attr()`：属性函数，可以更方便引用 HTML 的自定义属性
 - `clamp()`：比较函数，`clamp(<首选值>, <最小值>, <最大值>)` 只要尺寸不超过最小和最大边界，就会遵循首选值。相比媒体查询，可以更简洁方便地处理响应式
 
+#### 伪类 `:is` 和 `:where` 的逻辑函数和条件函数
+
+`:is()` 和 `:where()` 是 CSS 中的伪类选择器，允许以一种高效的方式对一系列选择器进行分组和定位。两者唯一区别在于 **权重**，`:where()` 的权重为 0，`:is()` 作为伪类选择器的权重为 10。
+
+```css
+button.focus, button:focus {}
+->
+button:is(.focus, :focus) {}
+
+content > h1, content > h2, content > h3, content > h4 {}
+->
+content > :is(h1, h2, h3, h4) {}
+```
+
 ### 练习
 
 #### 实现一个带透视的立方体
