@@ -68,3 +68,9 @@ css 的 `filter` 的属性有：`blur()` 模糊度、`brightness()` 明度、`co
 - [重复渐变与进度条](https://xiezongchen.github.io/practice-graphical/progress) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/progress.html)
 
 - [特殊渐变练习](https://xiezongchen.github.io/practice-graphical/specific-gradient) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/specific-gradient.html)
+
+#### 遮罩练习
+
+注意：**遮罩图像中的不透明部分将显示出元素的内容，透明部分将隐藏元素的内容**
+
+- [效果](https://xiezongchen.github.io/practice-graphical/mask) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/mask.html)
