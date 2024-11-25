@@ -62,7 +62,18 @@
     );
     background-image: conic-gradient(red, yellow, green);
   }
-  
+
+  /* 方格渐变，通过圆锥渐变实现 */
+  .grid-gradient {
+    background: conic-gradient(
+      rgb(28, 150, 215) 0deg 90deg,
+      white 90deg 180deg,
+      rgb(151, 209, 243) 180deg 270deg,
+      white 270deg 360deg
+    );
+    /* background-size: 100% 100%; */
+    background-size: 10% 10%;
+  }
 </style>
 <div class="content">
   <div class="diffuse-gradient">
@@ -73,4 +84,5 @@
   </div>
   <div class="box combined-gradient"></div>
   <div class="box cone-gradient"></div>
+  <div class="box grid-gradient"></div>
 </div>
