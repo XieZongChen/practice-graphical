@@ -1,0 +1,16 @@
+<style>
+  /* 使用自定义的paint()方法绘制背景 */
+  .element {
+    background-image: paint(my-gradient);
+    width: 100px;
+    height: 100px;
+  }
+</style>
+
+<body>
+  <div class="element"></div>
+  <script>
+    /* 注册Paint Worklet */
+    CSS.paintWorklet.addModule('./paint-worklet.js');
+  </script>
+</body>
