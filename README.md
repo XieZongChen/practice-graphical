@@ -68,13 +68,19 @@ css 的 `filter` 的属性有：`blur()` 模糊度、`brightness()` 明度、`co
 `:is()` 和 `:where()` 是 CSS 中的伪类选择器，允许以一种高效的方式对一系列选择器进行分组和定位。两者唯一区别在于 **权重**，`:where()` 的权重为 0，`:is()` 作为伪类选择器的权重为 10。
 
 ```css
-button.focus, button:focus {}
-->
-button:is(.focus, :focus) {}
+button.focus,
+button:focus {
+}
+- > button:is(.focus, :focus) {
+}
 
-content > h1, content > h2, content > h3, content > h4 {}
-->
-content > :is(h1, h2, h3, h4) {}
+content > h1,
+content > h2,
+content > h3,
+content > h4 {
+}
+- > content > :is(h1, h2, h3, h4) {
+}
 ```
 
 ### 练习
