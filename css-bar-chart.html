@@ -1,0 +1,42 @@
+<style>
+  .chart {
+    /* 定义图表容器的大小和布局 */
+    width: 300px; /* 宽度 */
+    height: 300px; /* 高度 */
+    display: flex; /* 使用 flex 布局，方便排列柱状图 */
+    justify-content: space-between; /* 均匀分布柱子间的间距 */
+    align-items: flex-end; /* 对齐到容器底部，柱子从底部向上生长 */
+    background-color: #f0f0f0; /* 背景色 */
+    padding: 10px; /* 内边距，避免柱子贴边 */
+    position: relative; /* 为子元素提供定位上下文 */
+  }
+
+  .bar {
+    /* 定义柱状图的样式 */
+    width: 30px; /* 固定柱子宽度 */
+    background-color: #3498db; /* 蓝色柱子 */
+    transition: height 0.5s ease-in-out; /* 平滑过渡效果，改变高度时有动画 */
+    position: relative; /* 提供定位上下文，用于显示数值 */
+  }
+
+  .bar::after {
+    /* 添加一个伪元素显示柱子的数值 */
+    content: attr(data-value); /* 读取 DOM 元素上的 data-value 属性 */
+    position: absolute; /* 绝对定位，定位到柱子顶部 */
+    bottom: 100%; /* 位于柱子顶部之外 */
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 调整位置使其居中 */
+    font-size: 12px; /* 字体大小 */
+    color: #333; /* 字体颜色 */
+  }
+</style>
+<body>
+  <!-- 图表容器 -->
+  <div class="chart">
+    <!-- 每个柱状图元素，设置高度和对应数值 -->
+    <div class="bar" style="height: 80%" data-value="80"></div>
+    <div class="bar" style="height: 60%" data-value="60"></div>
+    <div class="bar" style="height: 40%" data-value="40"></div>
+    <div class="bar" style="height: 20%" data-value="20"></div>
+  </div>
+</body>
