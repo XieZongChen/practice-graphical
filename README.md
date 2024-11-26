@@ -100,3 +100,7 @@ content > :is(h1, h2, h3, h4) {}
 经过尝试，只有 Paint Worklet 可以使用，而且兼容性很差，chrome 倒是能生效。这个 API 算是 MDN 给前端画的大饼吧
 
 - [效果](https://xiezongchen.github.io/practice-graphical/houdini) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/houdini.html)
+
+#### 实现 2d 柱状图
+
+- [效果](https://xiezongchen.github.io/practice-graphical/css-bar-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-bar-chart.html)
