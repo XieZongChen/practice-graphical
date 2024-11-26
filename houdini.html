@@ -1,16 +1,34 @@
 <style>
-  /* 使用自定义的paint()方法绘制背景 */
+  /* 使用自定义的 paint() 方法绘制背景 */
   .element {
     background-image: paint(my-gradient);
     width: 100px;
     height: 100px;
   }
+
+  .element2 {
+    display: layout(my-grid);
+    --grid-column-width: 100px;
+    --grid-row-height: 100px;
+  }
+  .item {
+    grid-column: 1 / 3; /* 定义列范围 */
+    grid-row: 1 / 2; /* 定义行范围 */
+  }
 </style>
 
 <body>
-  <div class="element"></div>
+  <div style="display: flex; flex-direction: column; gap: 20px">
+    <div class="element"></div>
+    <div class="element2">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </div>
   <script>
     /* 注册Paint Worklet */
     CSS.paintWorklet.addModule('./paint-worklet.js');
+    CSS.paintWorklet.addModule('./layout-worklet.js');
   </script>
 </body>
