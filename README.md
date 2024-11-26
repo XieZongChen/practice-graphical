@@ -81,7 +81,7 @@ content > :is(h1, h2, h3, h4) {}
 
 #### 实现一个带透视的立方体
 
-[效果](https://xiezongchen.github.io/practice-graphical/cube) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/cube.html)
+- [效果](https://xiezongchen.github.io/practice-graphical/cube) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/cube.html)
 
 #### Gradient 渐变练习
 
