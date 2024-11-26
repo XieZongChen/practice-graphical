@@ -27,8 +27,12 @@
     </div>
   </div>
   <script>
-    /* 注册Paint Worklet */
+    /* 注册 Paint Worklet */
     CSS.paintWorklet.addModule('./paint-worklet.js');
-    CSS.layoutWorklet.addModule('./layout-worklet.js');
+
+    if ('layoutWorklet' in CSS) {
+      /* 注册 Layout Worklet */
+      CSS.layoutWorklet.addModule('./layout-worklet.js');
+    }
   </script>
 </body>
