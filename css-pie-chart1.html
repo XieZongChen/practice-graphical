@@ -188,12 +188,11 @@
       const sum = firstVal + item.val;
       if (pieSlices[index + 1]) {
         pieSlices[index + 1].style.transform = `rotate(${sum}deg)`;
-        pieSlices[index + 1].setAttribute('title', item.name);
         firstVal = sum;
       }
     } else {
       pieSlices[1].style.transform = `rotate(${firstVal}deg)`;
-      pieSlices[1].setAttribute('title', item.name);
     }
+    pieSlices[index].setAttribute('title', item.name);
   });
 </script>
