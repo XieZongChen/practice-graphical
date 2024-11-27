@@ -65,6 +65,12 @@
     </div>
   </body>
   <script>
+    /**
+     * 实现思路：
+     * - 通过计算环的周长，总长其实就是 stroke-dasharray，通过 strokeDashoffset 来偏移虚线线段，那么开始的就是实线线段
+     * - 让这个线长度等于环长度，通过 api 让实线在开始的位置，图中白色环状区域就是 strokeDashoffset 的偏移量
+     * - 最后圆锥渐变可以定义百分比的渐变程度，比如 0 到 70% 是某个颜色，70% 到 100% 是某个颜色
+     */
     const circle = document.querySelector('#progress-circle circle');
     const radius = circle.r.baseVal.value;
     const circumference = radius * 2 * Math.PI;
