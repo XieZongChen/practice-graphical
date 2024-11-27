@@ -114,49 +114,86 @@
     justify-content: center;
   }
 </style>
-<div style="display: flex; flex-direction: column; gap: 20">
-  <div class="pieContainer">
-    <div class="pieBackground"></div>
-    <div id="pieSlice1" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice2" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice3" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice4" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice5" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice6" class="hold">
-      <div class="pie"></div>
-    </div>
+<div class="pieContainer">
+  <div class="pieBackground"></div>
+  <div id="pieSlice1" class="hold">
+    <div class="pie"></div>
   </div>
-  <div class="pieContainer">
-    <div class="pieBackground"></div>
-    <div id="pieSlice1" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice2" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice3" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice4" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice5" class="hold">
-      <div class="pie"></div>
-    </div>
-    <div id="pieSlice6" class="hold">
-      <div class="pie"></div>
-    </div>
-    <!-- 圆环图只需要在扇形图的基础上加一个圆形遮罩 -->
-    <div class="innerCircle"></div>
+  <div id="pieSlice2" class="hold">
+    <div class="pie"></div>
   </div>
+  <div id="pieSlice3" class="hold">
+    <div class="pie"></div>
+  </div>
+  <div id="pieSlice4" class="hold">
+    <div class="pie"></div>
+  </div>
+  <div id="pieSlice5" class="hold">
+    <div class="pie"></div>
+  </div>
+  <div id="pieSlice6" class="hold">
+    <div class="pie"></div>
+  </div>
+  <!-- 圆环图只需要在扇形图的基础上加一个圆形遮罩 -->
+  <!-- <div class="innerCircle"></div> -->
 </div>
+<script>
+  const option = {
+    data: [
+      {
+        name: '苹果',
+        val: 10,
+      },
+      {
+        name: '橘子',
+        val: 20,
+      },
+      {
+        name: '香蕉',
+        val: 5,
+      },
+      {
+        name: '香梨',
+        val: 15,
+      },
+      {
+        name: '西瓜',
+        val: 20,
+      },
+      {
+        name: '菠萝',
+        val: 30,
+      },
+    ],
+  };
+
+  const pieSlices = document.querySelectorAll('.hold');
+  const pie = document.querySelectorAll('.pie');
+
+  // 计算百分比val
+  option.data.forEach((item) => {
+    item.val = (item.val / 100) * 360;
+  });
+  let firstVal = option.data[0].val;
+
+  // 计算每个pie的旋转角度
+  pieSlices.forEach((slice, index) => {
+    const angle = option.data[index].val; // 计算角度
+    pie[index].style.transform = `rotate(${angle}deg)`;
+  });
+
+  // 计算每个pie之前定位的旋转角度
+  option.data.forEach((item, index) => {
+    if (index > 0) {
+      const sum = firstVal + item.val;
+      if (pieSlices[index + 1]) {
+        pieSlices[index + 1].style.transform = `rotate(${sum}deg)`;
+        pieSlices[index + 1].setAttribute('title', item.name);
+        firstVal = sum;
+      }
+    } else {
+      pieSlices[1].style.transform = `rotate(${firstVal}deg)`;
+      pieSlices[1].setAttribute('title', item.name);
+    }
+  });
+</script>
