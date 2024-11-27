@@ -97,7 +97,23 @@
     transform: rotate(70deg);
   }
 </style>
-
+<style>
+  /* 圆环图只需要在扇形图的基础上加一个圆形遮罩 */
+  .innerCircle {
+    position: absolute;
+    width: calc(var(--w) - 2 * var(--r));
+    height: 120px;
+    background-color: #ffffff;
+    border-radius: 100%;
+    top: var(--r);
+    left: var(--r);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5) inset;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
 <div style="display: flex; flex-direction: column; gap: 20">
   <div class="pieContainer">
     <div class="pieBackground"></div>
@@ -120,5 +136,27 @@
       <div class="pie"></div>
     </div>
   </div>
-  
+  <div class="pieContainer">
+    <div class="pieBackground"></div>
+    <div id="pieSlice1" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice2" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice3" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice4" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice5" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice6" class="hold">
+      <div class="pie"></div>
+    </div>
+    <!-- 圆环图只需要在扇形图的基础上加一个圆形遮罩 -->
+    <div class="innerCircle"></div>
+  </div>
 </div>
