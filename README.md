@@ -110,3 +110,7 @@ content > h4 {
 #### 实现 2d 柱状图
 
 - [效果](https://xiezongchen.github.io/practice-graphical/css-bar-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-bar-chart.html)
+
+#### 实现 2d 饼图和环形图
+
+- [基于 clip-path 裁剪 + transform 变换实现](https://xiezongchen.github.io/practice-graphical/css-pie-chart1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-pie-chart1.html)
