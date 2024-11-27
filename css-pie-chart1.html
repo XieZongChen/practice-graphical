@@ -170,19 +170,19 @@
   const pieSlices = document.querySelectorAll('.hold');
   const pie = document.querySelectorAll('.pie');
 
-  // 计算百分比val
+  // 计算百分比 val
   option.data.forEach((item) => {
     item.val = (item.val / 100) * 360;
   });
   let firstVal = option.data[0].val;
 
-  // 计算每个pie的旋转角度
+  // 计算每个 pie 的旋转角度
   pieSlices.forEach((slice, index) => {
     const angle = option.data[index].val; // 计算角度
     pie[index].style.transform = `rotate(${angle}deg)`;
   });
 
-  // 计算每个pie之前定位的旋转角度
+  // 计算每个 pie 之前定位的旋转角度
   option.data.forEach((item, index) => {
     if (index > 0) {
       const sum = firstVal + item.val;
