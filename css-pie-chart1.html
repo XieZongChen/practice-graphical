@@ -1,0 +1,124 @@
+<style>
+  /* 
+   基于 clip-path 裁剪 + transform 变换实现
+   - 首先通过绝对定位来做分层，每一层都是一个正方形，每个正方形通过 Transform 来做旋转的定位，然后做对应的裁剪即可
+  */
+  :root {
+    --w: 150px;
+    --r: 15px;
+  }
+
+  .pieContainer {
+    height: var(--w);
+    position: relative;
+  }
+
+  .pieBackground {
+    position: absolute;
+    width: var(--w);
+    height: var(--w);
+    border-radius: 100%;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* 每个扇形实际渲染的样式，利用 clip-path 裁剪为半圆形，后面通过 id 控制上色和旋转角度 */
+  .pie {
+    transition: all 1s;
+    width: var(--w);
+    height: var(--w);
+    border-radius: 100%;
+    /* 裁剪多边形, polygon 的每组代表每个点的坐标百分比位置 */
+    clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+  }
+
+  /* 
+    为什么需要裁剪两次呢？
+    - .pie 类的剪切，将元素的左半部分剪切掉，只显示右半部分。如此 .pie 元素就变成了一个半圆形。
+    - .hold 类的剪切将元素的右半部分剪切掉，只显示左半部分。如此 .hold 元素就变成了一个与 .pie 元素相对应的半圆形。
+    - 这么做就是因为矩形裁剪是单方向的，一旦圆环超过半圆就无法裁剪了。所以需要裁剪两次。
+  */
+  .hold {
+    /* clip 裁剪的时候必须使用绝对定位 */
+    position: absolute;
+    width: var(--w);
+    height: var(--w);
+    border-radius: 100%;
+    /* rect() 中代表矩形的坐标参数依次表示上边界、右边界、下边界和左边界 */
+    clip: rect(0px, var(--w), var(--w), calc(var(--w) / 2));
+  }
+
+  #pieSlice1 .pie {
+    background-color: #1b458b;
+    transform: rotate(30deg);
+  }
+
+  #pieSlice2 {
+    transform: rotate(30deg);
+  }
+
+  #pieSlice2 .pie {
+    background-color: #0a0;
+    transform: rotate(60deg);
+  }
+
+  #pieSlice3 {
+    transform: rotate(90deg);
+  }
+
+  #pieSlice3 .pie {
+    background-color: #f80;
+    transform: rotate(120deg);
+  }
+
+  #pieSlice4 {
+    transform: rotate(210deg);
+  }
+
+  #pieSlice4 .pie {
+    background-color: #08f;
+    transform: rotate(10deg);
+  }
+
+  #pieSlice5 {
+    transform: rotate(220deg);
+  }
+
+  #pieSlice5 .pie {
+    background-color: #a04;
+    transform: rotate(70deg);
+  }
+
+  #pieSlice6 {
+    transform: rotate(290deg);
+  }
+
+  #pieSlice6 .pie {
+    background-color: #ffd700;
+    transform: rotate(70deg);
+  }
+</style>
+
+<div style="display: flex; flex-direction: column; gap: 20">
+  <div class="pieContainer">
+    <div class="pieBackground"></div>
+    <div id="pieSlice1" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice2" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice3" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice4" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice5" class="hold">
+      <div class="pie"></div>
+    </div>
+    <div id="pieSlice6" class="hold">
+      <div class="pie"></div>
+    </div>
+  </div>
+  
+</div>
