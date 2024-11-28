@@ -120,3 +120,7 @@ content > h4 {
 #### 实现 2d 散点图和折线图
 
 - [效果](https://xiezongchen.github.io/practice-graphical/css-line-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-line-chart.html)
+
+#### 实现 3d 柱状图
+
+- [效果](https://xiezongchen.github.io/practice-graphical/css-3d-bar) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-3d-bar.html)
