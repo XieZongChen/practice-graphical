@@ -1,0 +1,375 @@
+<style>
+  /* 场景样式：定义背景立方体和坐标轴 */
+  .bg-cube {
+    width: 1200px; /* 背景立方体的宽度 */
+    height: 0;
+    position: relative;
+    bottom: 400px; /* 立方体偏移 */
+    transform-style: preserve-3d;
+    transform: perspective(12000px) translateY(400px) rotateY(-10deg); /* 透视视图，略微旋转 */
+    perspective-origin: 50% 50%; /* 透视的中心点 */
+  }
+
+  .bg-face {
+    position: absolute;
+    width: 1200px;
+    height: 400px;
+    opacity: 0.8;
+    text-align: center;
+    line-height: 400px;
+    font-size: 48px;
+  }
+
+  .bg-face2 {
+    position: absolute;
+    width: 1200px;
+    height: 1200px;
+    opacity: 0.8;
+    text-align: center;
+    font-size: 48px;
+  }
+
+  /* 定义立方体的各个面及其变换 */
+  .bg-front {
+    background-color: transparent;
+    transform: translateZ(600px);
+  }
+
+  .bg-back {
+    background-color: rgb(88, 88, 88);
+    transform: translateZ(-600px) rotateY(180deg);
+  }
+
+  .bg-left {
+    background-color: rgb(158, 158, 158);
+    transform: translateX(-600px) rotateY(-90deg);
+  }
+
+  .bg-bottom {
+    background-color: #e4e4e4;
+    transform: translateY(-200px) rotateX(-90deg);
+  }
+
+  /* X 轴样式 */
+  .xAxis {
+    position: absolute;
+    left: -140px;
+    top: 450px;
+    width: 100%;
+    font-size: 28px;
+    display: flex;
+    text-align: right;
+  }
+
+  .xAxis div {
+    flex: 1;
+    text-align: center;
+  }
+
+  /* Y 轴样式 */
+  .yAxis {
+    position: absolute;
+    top: 20px;
+    left: -230px;
+    font-size: 28px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+
+  .yAxis div {
+    flex: 1;
+  }
+</style>
+
+<style>
+  /* 柱状图样式与交互：控制立方体样式和动画 */
+  :root {
+    --recW: 200px;
+    --recH0: 0;
+    --recH1: 0;
+    --recH2: 0;
+    --recH3: 0;
+  }
+
+  .cube-warp {
+    position: absolute;
+    top: 25%; /* 调整到视口的中间位置 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 水平和垂直居中 */
+  }
+
+  /* 每个柱子的高度通过 translateY 动态调整 */
+  .c1 {
+    transform: translateY(calc(var(--recH0) * -1));
+  }
+
+  .c2 {
+    transform: translateX(300px) translateY(calc(var(--recH1) * -1));
+  }
+
+  .c3 {
+    transform: translateX(600px) translateY(calc(var(--recH2) * -1));
+  }
+
+  .c4 {
+    transform: translateX(900px) translateY(calc(var(--recH3) * -1));
+  }
+
+  /* 单个立方体定义 */
+  .cube {
+    width: 200px;
+    height: 0;
+    transform-style: preserve-3d;
+    perspective-origin: 50% 50%;
+    /* 
+     由于默认视点是屏幕中心，因此想看到立方体的顶面，就必须设置 translateY()，为了展示右侧面就必须设置 rotateY()。
+     为了能看到柱子的顶面，必须要将 perspective 设置为一个非常大的值，以此将透视视图矫正成正交视图
+    */
+    transform: perspective(12000px) translateY(400px) rotateY(-10deg);
+  }
+
+  /* 定义立方体每一面 */
+  .face {
+    position: absolute;
+    width: var(--recW);
+    opacity: 0.9;
+    text-align: center;
+    line-height: 400px;
+    font-size: 28px;
+  }
+
+  .c1 .face {
+    height: var(--recH0);
+  }
+
+  .c2 .face {
+    height: var(--recH1);
+  }
+
+  .c3 .face {
+    height: var(--recH2);
+  }
+
+  .c4 .face {
+    height: var(--recH3);
+  }
+
+  .face2 {
+    position: absolute;
+    width: var(--recW);
+    height: 200px;
+    opacity: 0.9;
+    text-align: center;
+  }
+
+  /* X 轴标签调整 */
+  .xLabel {
+    position: relative;
+    top: -120px;
+    left: -40px;
+  }
+
+  /* 立方体各面样式和位置调整 */
+  .front {
+    background-color: #ff0606;
+    transform: translateZ(calc(var(--recW) / 2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .back {
+    background-color: #700909;
+    transform: translateZ(calc(var(--recW) / 2 * -1)) rotateY(180deg);
+  }
+
+  .left {
+    background-color: #700909;
+    transform: translateX(calc(var(--recW) / 2 * -1)) rotateY(-90deg);
+  }
+
+  .right {
+    background-color: #700909;
+    transform: translateX(calc(var(--recW) / 2)) rotateY(90deg);
+  }
+
+  .top {
+    background-color: #ff3e3e;
+    transform: translateY(calc(var(--recW) / 2 * -1)) rotateX(90deg);
+  }
+
+  /* .bottom {
+        background-color: #ff0606;
+        transform: translateY(calc(var(--recH) - 100px)) rotateX(-90deg);
+    } */
+
+  /* 添加 hover 交互样式 */
+  .cube:hover .front,
+  .cube:hover .back,
+  .cube:hover .left,
+  .cube:hover .right,
+  .cube:hover .top,
+  .cube:hover .bottom {
+    opacity: 0.8;
+    filter: blur(0.7);
+    transition: 0.2s all linear;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .cube:hover .front-txt {
+    display: block;
+  }
+
+  .cube-max .front-txt {
+    display: block !important;
+    color: #fff;
+  }
+
+  .cube-max {
+    display: block !important;
+  }
+
+  .cube:hover .front,
+  .cube:hover .back,
+  .cube:hover .left {
+    background-color: #3a1cbd;
+  }
+
+  .cube:hover .right {
+    background-color: #140263;
+  }
+
+  .cube:hover .top,
+  .cube:hover .bottom {
+    background-color: #866bff;
+  }
+
+  .front .front-txt {
+    display: none;
+  }
+</style>
+
+<body>
+  <!-- 注意，背景的 dom 需要在 柱状图的 dom 的前面，这会影响到绘图顺序 -->
+  <div class="cube-warp">
+    <div class="bg-cube">
+      <div class="yAxis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="xAxis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="bg-face bg-front"></div>
+      <div class="bg-face bg-back"></div>
+      <div class="bg-face bg-left"></div>
+      <div class="bg-face2 bg-bottom"></div>
+    </div>
+    <div class="c1">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face2 top"></div>
+      </div>
+    </div>
+    <div class="c2">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face2 top"></div>
+      </div>
+    </div>
+    <div class="c3">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face2 top"></div>
+      </div>
+    </div>
+    <div class="c4">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face2 top"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const config = {
+      xAxis: ['2040Q1', '2040Q2', '2040Q3', '2040Q3'],
+      yAxis: ['400亿', '300亿', '200亿', '100亿', '0亿'],
+      maxY: 400,
+      data: [
+        {
+          quarter: 'Q1',
+          val: 200,
+        },
+        {
+          quarter: 'Q2',
+          val: 100,
+        },
+        {
+          quarter: 'Q3',
+          val: 300,
+        },
+        {
+          quarter: 'Q4',
+          val: 50,
+        },
+      ],
+    };
+
+    const cubes = document.querySelectorAll('.cube');
+    const maxId = config.data.findIndex(
+      (item) => item.val === Math.max(...config.data.map((item) => item.val))
+    );
+
+    cubes[maxId].className = 'cube cube-max';
+    // 设置每个柱子的高度
+    const root = document.documentElement;
+
+    console.log('maxId', maxId);
+
+    // 遍历数据，根据值设置柱子的高度
+    config.data.forEach((item, index) => {
+      const heightPercentage = item.val;
+      root.style.setProperty(`--recH${index}`, `${heightPercentage}px`);
+    });
+
+    // 设置柱子正面的显示值（如 "200亿"）
+    const frontElements = document.querySelectorAll('.front');
+    config.data.forEach((item, index) => {
+      frontElements[
+        index
+      ].innerHTML = `<div class='front-txt'>${item.val}亿</div>`;
+    });
+
+    // 设置 xAxis 的值
+    const xAxisElements = document.querySelectorAll('.xAxis > div');
+    for (let i = 0; i < config.xAxis.length; i++) {
+      xAxisElements[i].textContent = config.xAxis[i]; // 设置每个 X 轴标签
+    }
+
+    // 设置 yAxis 的值
+    const yAxisElements = document.querySelectorAll('.yAxis > div');
+    for (let i = 0; i < config.yAxis.length; i++) {
+      yAxisElements[i].textContent = config.yAxis[i]; // 设置每个 Y 轴标签
+    }
+  </script>
+</body>
