@@ -1,0 +1,12 @@
+<!-- xmlns 是 XML 命名空间属性，用于指定所使用的 XML 命名空间。 -->
+<!-- 命名空间是一种用于区分不同 XML 元素和属性的机制，以确保不同来源的 XML 数据可以正确解析和处理。 -->
+<!-- 如果嵌入在 HTML 内部，xmlns 属性是可以被省略的 -->
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+    <!-- 画一个圆心为 cx、cy，半径为 r，颜色为 fill 的圆 -->
+    <circle cx="175" cy="100" r="75" fill="red" />
+    <!-- 画一个坐标为 x、y，宽度为 width，高度为 height 的矩形 -->
+    <rect class="my-rect" x="10" y="10" width="75" height="50" fill="blue" />
+    <!-- 可以用 css 修改部分样式 -->
+    <style> circle { fill: #fff; } .my-rect:hover { fill: #000; } </style>
+</svg>
+<!-- SVG 也像 Canvas 一样是绘画模式的，即每一次绘制操作，都会覆盖早期的操作，所以在开发中需要极其注意结构顺序 -->

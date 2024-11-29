@@ -124,3 +124,7 @@ content > h4 {
 #### 实现 3d 柱状图
 
 - [效果](https://xiezongchen.github.io/practice-graphical/css/css-3d-bar) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/css-3d-bar.html)
+
+## SVG
+
+- [基础练习](https://xiezongchen.github.io/practice-graphical/svg/first) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/first.svg)
