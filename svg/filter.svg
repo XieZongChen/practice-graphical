@@ -1,0 +1,8 @@
+<svg width="500" height="500" viewBox="0 0 500 500">
+    <!-- 这里定义过滤器 -->
+    <filter id="blur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+    </filter>
+    <!-- 这里通过 url(#id) 进行使用 -->
+    <circle cx="170" cy="60" r="50" fill="green" filter="url(#blur)" />
+</svg>

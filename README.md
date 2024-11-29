@@ -128,3 +128,7 @@ content > h4 {
 ## SVG
 
 - [基础练习](https://xiezongchen.github.io/practice-graphical/svg/first.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/first.svg)
+
+### 过滤器
+
+- [练习](https://xiezongchen.github.io/practice-graphical/svg/filter.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/filter.svg)
