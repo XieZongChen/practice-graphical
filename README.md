@@ -87,40 +87,40 @@ content > h4 {
 
 #### 实现一个带透视的立方体
 
-- [效果](https://xiezongchen.github.io/practice-graphical/cube) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/cube.html)
+- [效果](https://xiezongchen.github.io/practice-graphical/css/cube) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/cube.html)
 
 #### Gradient 渐变练习
 
-- [重复渐变与进度条](https://xiezongchen.github.io/practice-graphical/progress) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/progress.html)
+- [重复渐变与进度条](https://xiezongchen.github.io/practice-graphical/css/progress) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/progress.html)
 
-- [特殊渐变练习](https://xiezongchen.github.io/practice-graphical/specific-gradient) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/specific-gradient.html)
+- [特殊渐变练习](https://xiezongchen.github.io/practice-graphical/css/specific-gradient) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/specific-gradient.html)
 
 #### 遮罩练习
 
 注意：**遮罩图像中的不透明部分将显示出元素的内容，透明部分将隐藏元素的内容**
 
-- [效果](https://xiezongchen.github.io/practice-graphical/mask) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/mask.html)
+- [效果](https://xiezongchen.github.io/practice-graphical/css/mask) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/mask.html)
 
 #### Houdini 练习
 
 经过尝试，只有 Paint Worklet 可以使用，而且兼容性很差，chrome 倒是能生效。这个 API 算是 MDN 给前端画的大饼吧
 
-- [效果](https://xiezongchen.github.io/practice-graphical/houdini) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/houdini.html)
+- [效果](https://xiezongchen.github.io/practice-graphical/css/houdini) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/houdini.html)
 
 #### 实现 2d 柱状图
 
-- [效果](https://xiezongchen.github.io/practice-graphical/css-bar-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-bar-chart.html)
+- [效果](https://xiezongchen.github.io/practice-graphical/css/css-bar-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/css-bar-chart.html)
 
 #### 实现 2d 饼图和环形图
 
-- [基于 clip-path 裁剪 + transform 变换实现](https://xiezongchen.github.io/practice-graphical/css-pie-chart1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-pie-chart1.html)
+- [基于 clip-path 裁剪 + transform 变换实现](https://xiezongchen.github.io/practice-graphical/css/css-pie-chart1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/css-pie-chart1.html)
 
-- [基于 conic-gradient 圆锥渐变实现](https://xiezongchen.github.io/practice-graphical/css-pie-chart2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-pie-chart2.html)
+- [基于 conic-gradient 圆锥渐变实现](https://xiezongchen.github.io/practice-graphical/css/css-pie-chart2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/css-pie-chart2.html)
 
 #### 实现 2d 散点图和折线图
 
-- [效果](https://xiezongchen.github.io/practice-graphical/css-line-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-line-chart.html)
+- [效果](https://xiezongchen.github.io/practice-graphical/css/css-line-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/css-line-chart.html)
 
 #### 实现 3d 柱状图
 
-- [效果](https://xiezongchen.github.io/practice-graphical/css-3d-bar) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css-3d-bar.html)
+- [效果](https://xiezongchen.github.io/practice-graphical/css/css-3d-bar) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/css/css-3d-bar.html)
