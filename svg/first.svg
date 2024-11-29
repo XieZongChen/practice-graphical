@@ -7,6 +7,6 @@
     <!-- 画一个坐标为 x、y，宽度为 width，高度为 height 的矩形 -->
     <rect class="my-rect" x="10" y="10" width="75" height="50" fill="blue" />
     <!-- 可以用 css 修改部分样式 -->
-    <style> circle { fill: #fff; } .my-rect:hover { fill: #000; } </style>
+    <style> circle { fill: #666; } .my-rect:hover { fill: #777; } </style>
 </svg>
 <!-- SVG 也像 Canvas 一样是绘画模式的，即每一次绘制操作，都会覆盖早期的操作，所以在开发中需要极其注意结构顺序 -->
