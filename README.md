@@ -134,3 +134,5 @@ content > h4 {
 - [练习](https://xiezongchen.github.io/practice-graphical/svg/filter.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/filter.svg)
 
 ### 遮罩
+
+- [练习](https://xiezongchen.github.io/practice-graphical/svg/mask.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/mask.svg)
