@@ -1,0 +1,10 @@
+<svg width="500" height="500" viewBox="0 0 500 500" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <mask id="mask">
+            <image width="500" height="500" href="./mask.png" />
+        </mask>
+    </defs>
+    <image mask="url(#mask)" width="500" height="500" href="./picture.jpg" />
+</svg>
