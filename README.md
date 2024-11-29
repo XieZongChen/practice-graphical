@@ -127,4 +127,4 @@ content > h4 {
 
 ## SVG
 
-- [基础练习](https://xiezongchen.github.io/practice-graphical/svg/first) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/first.svg)
+- [基础练习](https://xiezongchen.github.io/practice-graphical/svg/first.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/first.svg)
