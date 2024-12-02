@@ -7,9 +7,11 @@
 <svg width="800" height="800" version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- defs 标签代表被引用的资源 -->
     <defs>
-        <!-- 定义一个圆形 -->
+        <!-- 用 g 标签做分组 -->
         <g id="myCircle">
+            <!-- 绘制笑脸，笑脸的颜色会发生变化，所以这里不定义颜色，又外部定义这里继承 -->
             <circle cx="100" cy="100" r="50" stroke="black" stroke-width="10" />
             <!-- 绘制眼睛 -->
             <circle cx="80" cy="85" r="7" fill="black" />
@@ -22,19 +24,22 @@
 
     </defs>
     <defs>
+        <!-- 定义渐变颜色分组 -->
         <linearGradient id="gradient">
             <stop offset="0%" style="stop-color: rgb(255, 93, 12)" />
             <stop offset="100%" style="stop-color: #ff0000" />
         </linearGradient>
     </defs>
-    <!-- 使用定义的圆形 -->
+    <!-- use 引用定义的圆形，用不同形式设置颜色 -->
     <use xlink:href="#myCircle" fill="url(#gradient)" />
     <use xlink:href="#myCircle" x="200" fill="yellow" />
     <use xlink:href="#myCircle" y="200" fill="yellow" />
     <use xlink:href="#myCircle" x="200" y="200" fill="yellow" />
 </svg>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+<svg width="200" height="200" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
     <symbol id="myShape" viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="40" fill="red" />
     </symbol>
