@@ -141,3 +141,7 @@ content > h4 {
 >
 > - xmlns 属性用于定义 XML 文档中的默认命名空间。它指定了 XML 元素和属性的命名空间，如果没有指定其他命名空间，则默认使用该命名空间。
 > - xmlns:xlink 属性也是用于定义 XML 文档中的命名空间，但它是为了支持 XLink（XML 链接）规范而定义的。xmlns:xlink 属性指定了用于解析和处理 XLink 链接的命名空间。
+
+### 分组与引用
+
+- [练习](https://xiezongchen.github.io/practice-graphical/svg/group.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/group.svg)
