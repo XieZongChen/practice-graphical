@@ -146,3 +146,6 @@ content > h4 {
 
 - [练习](https://xiezongchen.github.io/practice-graphical/svg/group.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/group.svg)
 
+### 横纵比练习
+
+- [练习](https://xiezongchen.github.io/practice-graphical/svg/aspect-ratio.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/aspect-ratio.svg)
