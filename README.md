@@ -149,3 +149,7 @@ content > h4 {
 ### 横纵比练习
 
 - [练习](https://xiezongchen.github.io/practice-graphical/svg/aspect-ratio.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/aspect-ratio.svg)
+
+### 文字相关练习
+
+- [文本跟随路径运动动画](https://xiezongchen.github.io/practice-graphical/svg/text-animate.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/text-animate.svg)
