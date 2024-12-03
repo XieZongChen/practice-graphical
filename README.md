@@ -161,3 +161,5 @@ content > h4 {
 - [一个简单的声音播放动画](https://xiezongchen.github.io/practice-graphical/svg/animation-play-audio.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/animation-play-audio.svg)
 
 - [一个简单的 loading 动画](https://xiezongchen.github.io/practice-graphical/svg/animation-loading.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/animation-loading.svg)
+
+- [一个炫酷的提交按钮](https://xiezongchen.github.io/practice-graphical/svg/submit-btn) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/submit-btn.html)
