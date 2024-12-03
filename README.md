@@ -155,3 +155,7 @@ content > h4 {
 - [文本跟随路径运动动画](https://xiezongchen.github.io/practice-graphical/svg/text-animate.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/text-animate.svg)
 
 - [剪裁路径使用文本](https://xiezongchen.github.io/practice-graphical/svg/text-clip.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/text-clip.svg)
+
+### 动画相关练习
+
+- [一个简单的声音播放动画](https://xiezongchen.github.io/practice-graphical/svg/animation-play-audio.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/animation-play-audio.svg)
