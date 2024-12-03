@@ -1,0 +1,12 @@
+<svg width="400px" height="200px" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- 用文字定义一个 clipPath -->
+    <clipPath id="clip-text">
+        <text x="0" y="50%" fill="#f27678" font-size="120px" font-family=" 'Signika', sans-serif">
+            Graph</text>
+    </clipPath>
+    <!-- 定义两个被剪裁的底色图形，并使用 clip-path -->
+    <rect x="0" y="0" width="200" height="200" fill="#ed6e46" clip-path="url(#clip-text)" />
+    <circle cx="310" cy="100" r="135" fill="#bbc42a" clip-path="url(#clip-text)" />
+</svg>
