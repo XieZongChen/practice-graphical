@@ -1,8 +1,11 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-    <!-- 通过改变动画启动时间 begin 来做到播放条的差异化运动 -->
+    <!-- 通过改变动画启动时间 begin 来做到播放条的差异化律动运动 -->
     <rect fill="#fff" width="3" height="100" transform="translate(0) rotate(180 3 50)">
+        <!-- attributeName 定义为 height 的过渡变化 -->
+        <!-- dur 定义 1s 持续时间 -->
+        <!-- repeatCount 定义循环播放 -->
         <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
             repeatCount="indefinite" />
     </rect>
