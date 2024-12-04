@@ -167,3 +167,5 @@ content > h4 {
 ### 纹理相关练习
 
 - [一个基础的纹理](https://xiezongchen.github.io/practice-graphical/svg/texture1.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture1.svg)
+
+- [用矩阵生成花岗岩纹理](https://xiezongchen.github.io/practice-graphical/svg/texture2.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture2.svg)
