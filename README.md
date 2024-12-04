@@ -169,3 +169,5 @@ content > h4 {
 - [一个基础的纹理](https://xiezongchen.github.io/practice-graphical/svg/texture1.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture1.svg)
 
 - [用矩阵生成花岗岩纹理](https://xiezongchen.github.io/practice-graphical/svg/texture2.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture2.svg)
+
+- [用颜色通道生成迷彩服纹理](https://xiezongchen.github.io/practice-graphical/svg/texture3.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture3.svg)
