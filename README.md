@@ -163,3 +163,7 @@ content > h4 {
 - [一个简单的 loading 动画](https://xiezongchen.github.io/practice-graphical/svg/animation-loading.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/animation-loading.svg)
 
 - [一个炫酷的提交按钮](https://xiezongchen.github.io/practice-graphical/svg/submit-btn) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/submit-btn.html)
+
+### 纹理相关练习
+
+- [一个基础的纹理](https://xiezongchen.github.io/practice-graphical/svg/texture1.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture1.svg)
