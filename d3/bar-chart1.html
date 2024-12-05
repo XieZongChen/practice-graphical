@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>D3.js Bar Chart1</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  </head>
+
+  <body>
+    <svg id="chart"></svg>
+    <script>
+      /**
+       * 实现柱状图等其他图都会遵循一个套路:
+       * 1. 定义数据集
+       * 2. 定义绘图区域（安全边界 margin + 生成 SVG 的绘图区域）
+       * 3. 设置比例尺
+       * 4. 生成坐标轴
+       * 5. 绘制图元
+       */
+
+      /**
+       * 定义数据集
+       */
+      const data = [
+        { label: 'A', value: 20 },
+        { label: 'B', value: 50 },
+        { label: 'C', value: 30 },
+        { label: 'D', value: 80 },
+        { label: 'E', value: 40 },
+      ];
+
+      /**
+       * 定义绘图区域
+       * - 定义基础图表所在的 SVG 可视区域内部的某一块位置，一般可以理解为安全区域的边距，以防止图表某些元素丢失
+       */
+      const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+      const width = 960 - margin.left - margin.right;
+      const height = 500 - margin.top - margin.bottom;
+      const svg = d3
+        .select('#chart')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+      /**
+       * 设置比例尺
+       * - 通过 scaleBand 离散数据的比例尺传入 domain（数据域）
+       * - 然后 range 定义值的范围，让每个 label 的值映射到 range 的 [0, width]
+       * - 最后设置 padding 代表柱子间的间距
+       * - Y 轴一般是连续的值代表大小的关系，所以需要使用 scaleLinear 来实现
+       */
+      const x = d3
+        /**
+         * scaleBand：D3 的比例尺游程，用于将离散的数据到连续的空间范围内，并按照一定的方式进行分组和排序
+         * 在柱状图、条形图等图表中，通常用于定义 x 轴的比例尺，将不同的类别或标签映射成一定的长度
+         */
+        .scaleBand()
+        .domain(
+          // 比例尺的定义域，表示原始数据的范围
+          data.map(function (d) {
+            return d.label;
+          })
+        )
+        .range([0, width]) // 比例尺的值域，表示将原始数据映射到的连续空间的范围
+        .padding(0.2); // scaleBand() 比例尺中的分组间距，即每组数据之间的空白宽度
+
+      const y = d3
+        /**
+         * scaleLinear：D3 的线性比例尺，用于将连续的数据到连续的空间范围内
+         * 在柱状图、折线图等图表中，通常用于定义 y 轴的比例尺，将原始数据映射到实际的高度或者纵坐标位置上
+         */
+        .scaleLinear()
+        .domain([
+          // 比例尺的定义域，表示原始数据的范围
+          0,
+          d3.max(data, function (d) {
+            return d.value;
+          }),
+        ])
+        .range([height, 0]); // 比例尺的值域，表示将原始数据映射到的连续空间的范围
+      // X轴
+      svg
+        .append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(d3.axisBottom(x)); // 注意，这里需要修改 this 指向
+      // Y轴
+      svg.append('g').attr('class', 'y axis').call(d3.axisLeft(y).ticks(10));
+
+      /**
+       * 绘制图元
+       */
+      svg
+        .selectAll('.bar') // 选择 SVG 上所有 class 为 bar 的元素，若不存在则创建
+        .data(data) // 将数据与选择集绑定
+        .enter() // 若元素未创建，使用 enter 来创建占位的节点
+        .append('rect') // 创建矩形
+        .attr('class', 'bar') // 定义类名
+        .attr('x', function (d) {
+          // x 轴的数据处理
+          return x(d.label);
+        })
+        .attr('y', function (d) {
+          // y 轴的数据处理
+          return y(d.value);
+        })
+        .attr('width', x.bandwidth()) // 图宽度
+        .attr('height', function (d) {
+          // 图高度
+          return height - y(d.value);
+        });
+    </script>
+  </body>
+</html>
