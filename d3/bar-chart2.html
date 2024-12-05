@@ -5,7 +5,22 @@
     <title>D3.js Bar Chart1</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
   </head>
+  <style>
+    /* hover 渐进动画 */
+    .rect-hover {
+      transition: all 0.2s linear;
+    }
 
+    .rect-group:hover {
+      fill: red;
+    }
+
+    /* 浮层阴影样式 */
+    .label-overlay rect {
+      filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.2));
+    }
+
+  </style>
   <body>
     <svg id="chart"></svg>
     <script>
@@ -157,7 +172,7 @@
         );
 
       /**
-       * 季度分组
+       * 每个年度
        */
       const groupItems = group
         .append('rect')
@@ -181,6 +196,8 @@
 
       /**
        * 监听浮层的位置
+       * - 做 tooltip 的 hover 的时候，需要在 SVG 的可绘制区域中监听鼠标的移入和移出，但 SVG 是无法直接获取数据值
+       * - 所以需要在组和柱子做监听，就可以获得数据值和坐标位置
        */
       function onGroupLabel(e, d) {
         const mouseX = e.pageX;
@@ -188,7 +205,7 @@
         const labelOverlay = svg
           .append('g')
           .attr('class', 'label-overlay')
-          .attr('transform', `translate(${mouseX}, ${mouseY})`);
+          .attr('transform', `translate(${mouseX}, ${mouseY})`); // 浮层跟随鼠标
 
         labelOverlay
           .append('rect')
@@ -221,6 +238,7 @@
           .attr('r', 5)
           .style('fill', (d, i) => colors[i]);
 
+        // 浮层文案
         seasons
           .append('text')
           .text((d) => `${d.label}:`)
@@ -233,10 +251,11 @@
           .text((d) => `${d.value}`)
           .attr('x', 75)
           .attr('y', 9)
-          .attr('text-anchor', 'end')
+          .attr('text-anchor', 'end') // 文案对齐
           .attr('font-weight', 'bold')
           .attr('fill', 'black')
           .style('font-size', '12px');
+
         svg.on('mousemove', function (e) {
           labelOverlay.attr('transform', `translate(${e.pageX}, ${e.pageY})`);
         });
@@ -268,6 +287,7 @@
         .attr('width', xScale.bandwidth() / seasonLen)
         .attr('height', (d) => chartHeight - yScale(d.value))
         .on('mouseover', function (e, d) {
+          // 每个季度的 hover 事件，需要用 mouseover 和 mouseout 模拟
           rects.filter((d1) => d1.label !== d.label).style('opacity', '0.2');
           onGroupLabel(e, d3.select(this.parentNode).datum());
         })
@@ -277,6 +297,9 @@
         })
         .style('fill', (d, i) => colors[i]);
 
+      /**
+       * 柱子底部增加旋转的文案
+       */
       group
         .selectAll('text')
         .data((d) => d.season)
@@ -294,7 +317,7 @@
         )
         .attr('y', function (d) {
           const textHeight = this.getBoundingClientRect().height; // 获取文本高度
-          return chartHeight + textHeight; // 加上一些偏移量，使文本位于 X 轴上方
+          return chartHeight + textHeight; // 加上一些偏移量，使文本位于 X 轴上方，并相对 x 轴对齐
         })
         .attr('fill', '#000')
         .attr('transform', (d, i) => {
