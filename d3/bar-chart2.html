@@ -112,20 +112,26 @@
         .style('color', '#aaa')
         .attr('transform', `translate(0,${chartHeight})`)
         .call(
-          d3.axisBottom(xScale).tickSizeOuter(0).tickSize(0).tickPadding(10)
+          d3.axisBottom(xScale).tickSizeOuter(0).tickSize(0).tickPadding(10) //  tickSizeOuter 清除轴两端的刻度。tickSize 清除轴内部的刻度
         );
       chart
         .append('g')
         .attr('class', 'y-axis')
         .style('color', '#aaa')
         .call(d3.axisLeft(yScale).ticks(5).tickSizeOuter(0));
+
+      /**
+       * y 轴的辅助线优化
+       * - 因为刻度本身就是 line 标签，所以可以利用刻度生成辅助线，修改 x2 的坐标值来生成 y 轴的辅助线
+       * - 需要注意，生成辅助线的时候要排除 y 轴的 0 值辅助线，因为该辅助线会和 x 轴重合
+       */
       chart
         .selectAll('.y-axis .tick line')
         .filter((d, i) => i > 0)
         .attr('x2', svgWidth - margin.left - margin.right)
         .attr('stroke', '#aaa')
         .attr('stroke-width', 0.4);
-      chart.select('.y-axis path').style('display', 'none');
+      chart.select('.y-axis path').style('display', 'none'); // 隐藏 y 轴线
 
       // 创建group组，存不同年份的分组节点
       const horizontals = chart
@@ -235,7 +241,7 @@
           labelOverlay.attr('transform', `translate(${e.pageX}, ${e.pageY})`);
         });
       }
-      
+
       /**
        * 移除浮层的位置
        */
