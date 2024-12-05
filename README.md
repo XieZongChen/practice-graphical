@@ -173,3 +173,7 @@ content > h4 {
 - [用颜色通道生成迷彩服纹理](https://xiezongchen.github.io/practice-graphical/svg/texture3.svg) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture3.svg)
 
 - [纹理编辑器](https://xiezongchen.github.io/practice-graphical/svg/texture-editer) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/svg/texture-editer.html)
+
+## D3
+
+- [实现简单的柱状图，总结实现图表的思路步骤](https://xiezongchen.github.io/practice-graphical/d3/bar-chart1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/d3/bar-chart1.html)
