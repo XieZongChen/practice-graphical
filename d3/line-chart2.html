@@ -173,7 +173,7 @@
         .append('g')
         .attr('class', 'group');
 
-      // 将一条线的线体、标签、点放入组，一组代表一条完整的线
+      // 将一条线的线体、标签、点放入组，一组代表一条完整的线。lines 则管理了所有这样的线组
       const lines = group
         .append('path')
         .datum((d, i) => d)
@@ -340,16 +340,19 @@
 
       const texts = d3.selectAll('.a-txt'); // 选择所有文本元素
 
+      // each 遍历每个线组
       lines.each(function (d, i) {
         const line = d3.select(this); // 当前折线元素
         const text = texts.filter(function (_, j) {
           return j === i; // 根据索引筛选对应的文本元素
         });
 
+        // 线的 dom 节点
         const pathEl = line.node();
         console.log('🚀 ~ file: index.js:317 ~ pathEl:', pathEl);
         // 获取路径总长度
         const pathLength = pathEl.getTotalLength();
+        // 创建一个范围为 0 ～ pathLength 的插值器，用于动态计算路径上不同点的位置，从而实现路径绘制的动画效果
         const interpolator = d3.interpolate(0, pathLength);
 
         // 绑定过渡方法和动画效果
@@ -366,13 +369,18 @@
           .delay(0)
           .duration(6000)
           .attr('stroke-dashoffset', 0)
+          // 在 tween 的 end 中定义线段尾部文字的跟随动画
           .tween('end', function () {
             return function (t) {
+              // 参数 t 代表动画的实时进度
+              // 通过插值器取到线段的实时长度
               const length = interpolator(t);
+              // 通过 dom 的 getPointAtLength 取到线最后一个点的实时位置
               const point = pathEl.getPointAtLength(length);
               const x = point.x;
               const y = point.y;
 
+              // 通过实时位置让尾部文字跟随
               text
                 .text(data.label[i])
                 .attr('x', x + 10)
