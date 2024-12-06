@@ -181,3 +181,5 @@ content > h4 {
 - [实现带分组的柱状图及辅助线](https://xiezongchen.github.io/practice-graphical/d3/bar-chart2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/d3/bar-chart2.html)
 
 - [实现简单的折线图](https://xiezongchen.github.io/practice-graphical/d3/line-chart1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/d3/line-chart1.html)
+
+- [实现带动画的折线图](https://xiezongchen.github.io/practice-graphical/d3/line-chart2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/d3/line-chart2.html)
