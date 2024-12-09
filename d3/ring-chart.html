@@ -47,6 +47,16 @@
       radius = Math.min(width, height) / 2;
 
     svg.attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-    //...
+
+    // 饼图布局
+    const pie = d3.layout
+      .pie()
+      .sort(null) // 禁用对扇形的排序
+      .value(function (d) {
+        return d.value;
+      });
+    
+    // 定义数据集
+    
   </script>
 </html>
