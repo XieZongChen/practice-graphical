@@ -113,6 +113,44 @@
       });
     }
 
-    
+    change(randomData());
+
+    // 创建环形
+    function change(data) {
+        
+      /* 生成环形 */
+      const slice = svg
+        .select('.slices') // 选择类名为 slices 的元素
+        .selectAll('path.slice') // 选择所有类名为 slice 的路径元素
+        .data(pie(data), key); // pie(data) 是将数据转换为饼图布局，key 是一个函数，用于指定数据的唯一标识
+
+      slice
+        .enter() // 选择新加入的数据
+        .insert('path') // 在每个数据点上插入一个新的路径元素
+        .style('fill', function (d) {
+          // 为每个路径元素设置填充颜色比例尺上的颜色
+          return color(d.data.label);
+        })
+        .attr('class', 'slice'); // 为路径元素添加类名
+
+      slice
+        .transition() // 设置路径元素的过渡效果
+        .duration(1000) // 过渡持续时间为 1 秒
+        .attrTween('d', function (d) {
+          // 创建一个插值函数，用于计算当前路径和目标路径之间的中间状态
+          this._current = this._current || d;
+          const interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function (t) {
+            // arc(interpolate(t)) 将插值结果转换为路径字符串
+            return arc(interpolate(t));
+          };
+        });
+
+      // 将多余的路径元素移除
+      slice.exit().remove();
+
+      // ....
+    }
   </script>
 </html>
