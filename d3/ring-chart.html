@@ -32,7 +32,7 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
   </head>
   <body>
-    <button class="randomize">随机</button>
+    <button id="randomData">随机</button>
   </body>
   <script>
     // 结构布局
@@ -48,6 +48,11 @@
 
     svg.attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
+    // 添加按钮事件
+    document.querySelector('#randomData').addEventListener('click', () => {
+      change(randomData());
+    });
+
     // 饼图布局
     const pie = d3.layout
       .pie()
@@ -61,12 +66,21 @@
       .arc()
       .outerRadius(radius * 0.8) // 外半径
       .innerRadius(radius * 0.4); // 内半径
-
     // 创建名为 outerArc 的弧形生成器
     const outerArc = d3.svg
       .arc()
       .innerRadius(radius * 0.9) // 内半径
       .outerRadius(radius * 0.9); // 外半径
+
+    // 变化数据可以得到饼图
+    // const arc = d3.svg
+    //   .arc()
+    //   .outerRadius(radius * 0.8)
+    //   .innerRadius(radius * 0);
+    // const outerArc = d3.svg
+    //   .arc()
+    //   .innerRadius(radius * 0.8)
+    //   .outerRadius(radius * 0.8);
 
     // 用于指定数据的唯一标识
     const key = function (d) {
