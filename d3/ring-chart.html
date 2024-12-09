@@ -199,6 +199,34 @@
 
       // 移除不再需要的文本元素
       text.exit().remove();
+
+      /* 生成引线 */
+      const polyline = svg
+        .select('.lines')
+        .selectAll('polyline')
+        .data(pie(data), key);
+
+      polyline.enter().append('polyline');
+
+      polyline
+        .transition()
+        .duration(1000)
+        .attrTween('points', function (d) {
+          this._current = this._current || d;
+          const interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function (t) {
+            const d2 = interpolate(t);
+            const pos = outerArc.centroid(d2);
+            // pos[0] 根据中间角度的位置确定折线的水平方向
+            pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+            // arc.centroid(d2) 和 outerArc.centroid(d2) 计算折线的起点和终点位置
+            return [arc.centroid(d2), outerArc.centroid(d2), pos];
+          };
+        });
+
+      // 移除不再需要的折线元素
+      polyline.exit().remove();
     }
   </script>
 </html>
