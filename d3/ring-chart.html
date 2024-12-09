@@ -55,8 +55,64 @@
       .value(function (d) {
         return d.value;
       });
-    
-    // 定义数据集
+
+    // 创建名为 arc 的弧形生成器
+    const arc = d3.svg
+      .arc()
+      .outerRadius(radius * 0.8) // 外半径
+      .innerRadius(radius * 0.4); // 内半径
+
+    // 创建名为 outerArc 的弧形生成器
+    const outerArc = d3.svg
+      .arc()
+      .innerRadius(radius * 0.9) // 内半径
+      .outerRadius(radius * 0.9); // 外半径
+
+    // 用于指定数据的唯一标识
+    const key = function (d) {
+      return d.data.label;
+    };
+
+    // 定义颜色比例尺
+    const color = d3.scale
+      .ordinal() // 创建离散的比例尺
+      // 定义比例尺的输入域，即标签数组
+      .domain([
+        'Rose',
+        'Sunflower',
+        'Tulip',
+        'Orchid',
+        'Lily',
+        'Jasmine',
+        'Lavender',
+        'Cherry Blossom',
+        'Maple',
+        'Bamboo',
+        'Cactus',
+      ])
+      // 定义比例尺的输出范围，即颜色数组
+      .range([
+        '#142403 ',
+        '#32520e ',
+        '#226232 ',
+        '#207134',
+        '#2C9747 ',
+        '#36BF59 ',
+        '#57D177',
+        '#7FDD97 ',
+        '#A6E8B7',
+        '#a6f5ba',
+        '#f2fce5',
+      ]);
+
+    // 随机生成数据
+    function randomData() {
+      const labels = color.domain();
+      return labels.map(function (label) {
+        return { label: label, value: Math.random() };
+      });
+    }
+
     
   </script>
 </html>
