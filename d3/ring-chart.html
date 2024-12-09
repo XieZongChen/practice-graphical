@@ -117,7 +117,6 @@
 
     // 创建环形
     function change(data) {
-        
       /* 生成环形 */
       const slice = svg
         .select('.slices') // 选择类名为 slices 的元素
@@ -150,7 +149,56 @@
       // 将多余的路径元素移除
       slice.exit().remove();
 
-      // ....
+      /* 生成标注 */
+      const text = svg
+        .select('.labels')
+        .selectAll('text') // 选择 .labels 下的所有 text
+        .data(pie(data), key); // data(pie(data), key) 将数据绑定到文本元素上，pie(data) 将数据转换为饼图布局
+
+      text
+        .enter() // 获取新添加的文本元素
+        .append('text') // 将它们添加到 .labels 元素中
+        .attr('dy', '.35em') // 设置文本的垂直对齐方式为中心对齐
+        .text(function (d) {
+          // 文本内容取 data 的 label
+          return d.data.label;
+        });
+
+      // 用于计算每个数据对象的中间角度
+      function midAngle(d) {
+        return d.startAngle + (d.endAngle - d.startAngle) / 2;
+      }
+
+      text
+        .transition() // 创建一个过渡效果
+        .duration(1000) // 过渡持续时间为 1 秒
+        .attrTween('transform', function (d) {
+          // 实现文本元素的动画移动
+          this._current = this._current || d; // 保存当前的数据对象
+          const interpolate = d3.interpolate(this._current, d); // 创建插值函数，用于计算当前数据对象和目标数据对象之间的中间状态
+          this._current = interpolate(0); // 计算并保存 0 点的插值结果
+          return function (t) {
+            // 返回的函数接收一个时间参数 t ，并根据插值函数的结果计算当前时间点的位置
+            const d2 = interpolate(t); // 计算当前时间点的插值结果
+            const pos = outerArc.centroid(d2); // 计算文本的位置
+            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1); // 根据中间角度的位置确定文本的水平方向
+            return 'translate(' + pos + ')';
+          };
+        })
+        .styleTween('text-anchor', function (d) {
+          // 实现文本的动画对齐方式
+          this._current = this._current || d;
+          const interpolate = d3.interpolate(this._current, d);
+          this._current = interpolate(0);
+          return function (t) {
+            const d2 = interpolate(t);
+            // 根据中间角度的位置，如果小于 π，则对齐方式为"start"，否则为"end"
+            return midAngle(d2) < Math.PI ? 'start' : 'end';
+          };
+        });
+
+      // 移除不再需要的文本元素
+      text.exit().remove();
     }
   </script>
 </html>
