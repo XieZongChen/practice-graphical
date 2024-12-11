@@ -288,6 +288,50 @@
 
       series++;
     });
+
+    // 生成图例
+    const LegendOptions = ['Smartphone', 'Tablet'];
+    const svg = d3
+      .select('#body')
+      .selectAll('svg')
+      .append('svg')
+      .attr('width', cfg.w + 100)
+      .attr('height', cfg.h);
+
+    const legend = svg
+      .append('g')
+      .attr('class', 'legend')
+      .attr('height', 100)
+      .attr('width', 200)
+      .attr('transform', 'translate(90,20)');
+    legend
+      .selectAll('rect')
+      .data(LegendOptions)
+      .enter()
+      .append('rect')
+      .attr('x', cfg.w - 65)
+      .attr('y', function (d, i) {
+        return i * 20;
+      })
+      .attr('width', 10)
+      .attr('height', 10)
+      .style('fill', function (d, i) {
+        return ['#3B1123', '#D04884'][i];
+      });
+    legend
+      .selectAll('text')
+      .data(LegendOptions)
+      .enter()
+      .append('text')
+      .attr('x', cfg.w - 52)
+      .attr('y', function (d, i) {
+        return i * 20 + 9;
+      })
+      .attr('font-size', '11px')
+      .attr('fill', '#737373')
+      .text(function (d) {
+        return d;
+      });
   };
 
   draw('#chart', d);
