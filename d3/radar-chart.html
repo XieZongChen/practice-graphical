@@ -187,6 +187,56 @@
         .attr('fill', '#737373')
         .text(Format(((j + 1) * cfg.maxValue) / cfg.levels));
     }
+
+    // 生成多边形
+    let series = 0; // 用于给每个多边形设置唯一的类名
+    d.forEach(function (y, x) {
+      // 参数 y 表示数组元素的值， x 表示数组元素的索引
+      let dataValues = []; // 用于存储每个多边形的顶点坐标
+      y.forEach(function (j, i) {
+        // 根据角度 angle 和最大值 cfg.maxValue ，计算多边形顶点的 x 坐标 xCoord 和 y 坐标 yCoord
+        let value = Math.max(j.value, 0);
+        let angle = (i * cfg.radians) / total;
+        let xCoord =
+          (cfg.w / 2) *
+          (1 -
+            (parseFloat(value) / cfg.maxValue) * cfg.factor * Math.sin(angle));
+        let yCoord =
+          (cfg.h / 2) *
+          (1 -
+            (parseFloat(value) / cfg.maxValue) * cfg.factor * Math.cos(angle));
+        dataValues.push([xCoord, yCoord]);
+      });
+      dataValues.push(dataValues[0]);
+
+      // 创建一个多边形元素，并绑定数据、样式、鼠标事件
+      g.append('polygon')
+        .data([dataValues])
+        .attr('class', 'radar-chart-serie' + x)
+        .style('stroke-width', '2px')
+        .style('stroke', cfg.color(x))
+        .style('fill', cfg.color(x))
+        .style('fill-opacity', cfg.opacityArea)
+        .attr('points', function (d) {
+          return d
+            .map(function (point) {
+              return point[0] + ',' + point[1];
+            })
+            .join(' ');
+        })
+        .on('mouseover', function () {
+          g.selectAll('polygon').transition(200).style('fill-opacity', 0.1);
+          d3.select(this).transition(200).style('fill-opacity', 0.7);
+        })
+        .on('mouseout', function () {
+          g.selectAll('polygon')
+            .transition(200)
+            .style('fill-opacity', cfg.opacityArea);
+        });
+
+      series++;
+    });
+    
   };
 
   draw('#chart', d);
