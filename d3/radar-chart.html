@@ -236,7 +236,58 @@
 
       series++;
     });
-    
+
+    // 生成节点
+    d.forEach(function (y) {
+      // 根据 series 来知道是第几个围合的多边形，用于区分样式、事件
+      g.selectAll('.nodes')
+        .data(y) // 根据 y，可以得到每个节点的坐标，绘制 circle
+        .enter()
+        .append('circle')
+        .attr('class', 'radar-chart-serie' + series)
+        .attr('r', cfg.radius)
+        .attr('alt', function (j) {
+          return Math.max(j.value, 0);
+        })
+        .attr('cx', function (j, i) {
+          return (
+            (cfg.w / 2) *
+            (1 -
+              (Math.max(j.value, 0) / cfg.maxValue) *
+                cfg.factor *
+                Math.sin((i * cfg.radians) / total))
+          );
+        })
+        .attr('cy', function (j, i) {
+          return (
+            (cfg.h / 2) *
+            (1 -
+              (Math.max(j.value, 0) / cfg.maxValue) *
+                cfg.factor *
+                Math.cos((i * cfg.radians) / total))
+          );
+        })
+        .attr('data-id', function (j) {
+          return j.axis;
+        })
+        .style('fill', cfg.color(series))
+        .style('fill-opacity', 0.9)
+        .on('mouseover', function () {
+          g.selectAll('polygon').transition(200).style('fill-opacity', 0.1);
+          d3.select(this).transition(200).style('fill-opacity', 0.7);
+        })
+        .on('mouseout', function () {
+          g.selectAll('polygon')
+            .transition(200)
+            .style('fill-opacity', cfg.opacityArea);
+        })
+        .append('title')
+        .text(function (j) {
+          return Math.max(j.value, 0);
+        });
+
+      series++;
+    });
   };
 
   draw('#chart', d);
