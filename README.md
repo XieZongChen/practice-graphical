@@ -191,3 +191,5 @@ content > h4 {
 - [像素化一个图片](https://xiezongchen.github.io/practice-graphical/canvas/pixelate) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/pixelate.html)
 
 - [用 Web Worker 处理操作](https://xiezongchen.github.io/practice-graphical/canvas/use-web-worker) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/use-web-worker.html)
+
+- [使用 canvas 进行离屏渲染](https://xiezongchen.github.io/practice-graphical/canvas/off-screen-render1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/off-screen-render1.html)
