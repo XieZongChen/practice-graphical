@@ -185,3 +185,7 @@ content > h4 {
 - [实现带动画的折线图](https://xiezongchen.github.io/practice-graphical/d3/line-chart2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/d3/line-chart2.html)
 
 - [实现动态环形图](https://xiezongchen.github.io/practice-graphical/d3/ring-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/d3/ring-chart.html)
+
+## Canvas
+
+- [像素化一个图片](https://xiezongchen.github.io/practice-graphical/canvas/pixelate) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/pixelate.html)
