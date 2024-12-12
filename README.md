@@ -189,3 +189,5 @@ content > h4 {
 ## Canvas
 
 - [像素化一个图片](https://xiezongchen.github.io/practice-graphical/canvas/pixelate) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/pixelate.html)
+
+- [用 Web Worker 处理操作](https://xiezongchen.github.io/practice-graphical/canvas/use-web-worker) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/use-web-worker.html)
