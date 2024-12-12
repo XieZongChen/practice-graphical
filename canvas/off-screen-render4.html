@@ -1,0 +1,8 @@
+<canvas id="mainCanvas" width="300" height="300"></canvas>
+<script>
+  var htmlCanvas = document.getElementById('mainCanvas');
+  var offscreen = htmlCanvas.transferControlToOffscreen();
+
+  var worker = new Worker('worker2.js');
+  worker.postMessage({ canvas: offscreen }, [offscreen]);
+</script>
