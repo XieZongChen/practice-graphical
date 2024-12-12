@@ -1,0 +1,20 @@
+<canvas id="mainCanvas" width="300" height="300"></canvas>
+<script>
+  const canvas = document.getElementById('mainCanvas').getContext('bitmaprenderer');
+
+  // 创建一个新的 OffscreenCanvas 对象
+  const offscreen = new OffscreenCanvas(256, 256);
+
+  // 获取 WebGL 上下文进行绘制
+  const gl = offscreen.getContext('webgl');
+
+  // 设置 WebGL 绘制的一些状态
+  gl.clearColor(0.0, 0.0, 1.0, 1.0); // 设置清除颜色为蓝色
+  gl.clear(gl.COLOR_BUFFER_BIT); // 清除颜色缓冲区
+
+  // 将离屏缓冲区的内容转换为 ImageBitmap
+  const bitmap = offscreen.transferToImageBitmap();
+
+  // 将 ImageBitmap 应用到 canvas 画布
+  canvas.transferFromImageBitmap(bitmap);
+</script>
