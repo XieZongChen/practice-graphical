@@ -1,0 +1,17 @@
+<canvas id="mainCanvas" width="300" height="300"></canvas>
+<script>
+  // 获取屏幕上的 <canvas> 元素的绘图上下文
+  const onscreenCanvas = document.getElementById('mainCanvas');
+  const onscreenCtx = onscreenCanvas.getContext('2d');
+
+  // 创建一个 OffscreenCanvas 对象
+  const offscreenCanvas = new OffscreenCanvas(200, 200);
+  const offscreenCtx = offscreenCanvas.getContext('2d');
+
+  // 在 OffscreenCanvas 上绘制
+  offscreenCtx.fillStyle = 'red';
+  offscreenCtx.fillRect(50, 50, 100, 100);
+
+  // 将离屏缓冲区的内容转移到屏幕上的 <canvas> 元素
+  onscreenCtx.drawImage(offscreenCanvas, 0, 0);
+</script>
