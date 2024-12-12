@@ -197,3 +197,5 @@ content > h4 {
 - [使用 OffscreenCanvas 进行离屏渲染](https://xiezongchen.github.io/practice-graphical/canvas/off-screen-render2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/off-screen-render2.html)
 
 - [使用 transferToImageBitmap 进行离屏渲染](https://xiezongchen.github.io/practice-graphical/canvas/off-screen-render3) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/off-screen-render3.html)
+
+- [使用 Web Worker 处理离屏渲染](https://xiezongchen.github.io/practice-graphical/canvas/off-screen-render4) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/off-screen-render4.html)
