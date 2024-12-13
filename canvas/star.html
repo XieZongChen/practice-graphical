@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas star</title>
+    <style>
+      body {
+        background: #060e1b;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+      let canvas = document.getElementById('canvas'),
+        ctx = canvas.getContext('2d'),
+        w = (canvas.width = window.innerWidth),
+        h = (canvas.height = window.innerHeight),
+        hue = 217, // 色相值
+        stars = [], // 星星实例的集合
+        count = 0, // 当前渲染星星的数量
+        maxStars = 1000; // 最大可渲染数量
+
+      // Cache gradient
+      let canvas2 = document.createElement('canvas'),
+        ctx2 = canvas2.getContext('2d');
+      canvas2.width = 100;
+      canvas2.height = 100;
+      let half = canvas2.width / 2,
+        gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
+      gradient2.addColorStop(0.025, '#fff');
+      gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+      gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+      gradient2.addColorStop(1, 'transparent');
+
+      ctx2.fillStyle = gradient2;
+      ctx2.beginPath();
+      ctx2.arc(half, half, half, 0, Math.PI * 2);
+      ctx2.fill();
+      // End cache
+
+      function random(min, max) {
+        if (arguments.length < 2) {
+          // 如果只提供一个参数，那么该参数将被视为最大值，最小值默认为 0
+          max = min;
+          min = 0;
+        }
+
+        if (min > max) {
+          // 如果提供了两个参数，第一个参数将被视为最小值，第二个参数将被视为最大值
+          // 这里保证 min 一定是最小值
+          let hold = max;
+          max = min;
+          min = hold;
+        }
+
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      /**
+       * 获取在 x 宽 y 高下最小外接圆的半径
+       * - 用最小外接圆是因为渲染时允许轨道部分在视窗外
+       * - 最小外接圆以外的轨道将完全不在视窗内，渲染无意义
+       */
+      function maxOrbit(x, y) {
+        // 通过勾股定理算出 x 宽 y 高的矩形对角线并取整，即为直径
+        let diameter = Math.round(Math.sqrt(x * x + y * y));
+        return diameter / 2;
+      }
+
+      let Star = function () {
+        this.orbitRadius = random(maxOrbit(w, h)); // 随机轨道
+        // 由于需要模拟“近大远小”的空间纵深效果，所以轨道半径越大，星星的尺寸就要越大
+        // 为了防止有概率变大，所以限制在了 60，同时减少 12 倍来缩放星星大小
+        this.radius = random(60, this.orbitRadius) / 12; // 星星半径
+        this.orbitX = w / 2; // 轨道中心 x
+        this.orbitY = h / 2; // 轨道中心 y
+        this.timePassed = random(0, maxStars); // 用于控制星星的轨道的相对位置
+        this.speed = random(this.orbitRadius) / 50000; // 随机速度
+        this.alpha = random(2, 10) / 10; // 随机透明度
+        count++;
+        stars[count] = this;
+      };
+
+      Star.prototype.draw = function () {
+        // 使用 Math.sin() 和 Math.cos() 函数计算出星星在椭圆轨道上的 x 和 y 坐标
+        let x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+          y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+          twinkle = random(10); // 实现闪烁效果
+
+        if (twinkle === 1 && this.alpha > 0) {
+          this.alpha -= 0.05;
+        } else if (twinkle === 2 && this.alpha < 1) {
+          this.alpha += 0.05;
+        }
+
+        ctx.globalAlpha = this.alpha; // 用透明度模拟闪烁
+        ctx.drawImage(
+          canvas2,
+          x - this.radius / 2,
+          y - this.radius / 2,
+          this.radius,
+          this.radius
+        );
+        this.timePassed += this.speed;
+      };
+
+      for (let i = 0; i < maxStars; i++) {
+        new Star();
+      }
+
+      function animation() {
+        // 绘制半透明黑色背景
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 1)';
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.globalCompositeOperation = 'lighter'; // 设置混合模式为 lighter，以实现星星的亮度效果
+
+        // 遍历 stars 数组，调用每个星星的 draw 方法来绘制星星
+        for (let i = 1, l = stars.length; i < l; i++) {
+          stars[i].draw();
+        }
+
+        // 用 RAF 保证帧率
+        window.requestAnimationFrame(animation);
+      }
+
+      animation();
+    </script>
+  </body>
+</html>
