@@ -79,7 +79,7 @@
         this.radius = random(60, this.orbitRadius) / 12; // 星星半径
         this.orbitX = w / 2; // 轨道中心 x
         this.orbitY = h / 2; // 轨道中心 y
-        this.timePassed = random(0, maxStars); // 用于控制星星的轨道的相对位置
+        this.timePassed = random(0, maxStars); // 用于控制星星在轨道上的相对位置
         this.speed = random(this.orbitRadius) / 50000; // 随机速度
         this.alpha = random(2, 10) / 10; // 随机透明度
         count++;
@@ -99,6 +99,7 @@
         }
 
         ctx.globalAlpha = this.alpha; // 用透明度模拟闪烁
+        // 绘制到画布上
         ctx.drawImage(
           canvas2,
           x - this.radius / 2,
@@ -106,6 +107,7 @@
           this.radius,
           this.radius
         );
+        // 更新 this.timePassed 的值，用于控制下次星星出现的位置，而增加值为当前星星的速度 this.speed
         this.timePassed += this.speed;
       };
 
