@@ -16,32 +16,31 @@
   <body>
     <canvas id="canvas"></canvas>
     <script>
-      let canvas = document.getElementById('canvas'),
+      let canvas = document.getElementById('canvas'), // 用于显示的 canvas
         ctx = canvas.getContext('2d'),
         w = (canvas.width = window.innerWidth),
         h = (canvas.height = window.innerHeight),
         hue = 217, // 色相值
         stars = [], // 星星实例的集合
-        count = 0, // 当前渲染星星的数量
+        count = 0, // 用于创建星星实例时标记当前是第几个星星
         maxStars = 1000; // 最大可渲染数量
 
-      // Cache gradient
-      let canvas2 = document.createElement('canvas'),
-        ctx2 = canvas2.getContext('2d');
-      canvas2.width = 100;
-      canvas2.height = 100;
-      let half = canvas2.width / 2,
-        gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
-      gradient2.addColorStop(0.025, '#fff');
-      gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
-      gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
-      gradient2.addColorStop(1, 'transparent');
-
-      ctx2.fillStyle = gradient2;
-      ctx2.beginPath();
-      ctx2.arc(half, half, half, 0, Math.PI * 2);
-      ctx2.fill();
-      // End cache
+      // 离屏渲染星星的形状和渐变效果形状逻辑 -- 起始
+      let canvas2 = document.createElement('canvas'), // 创建一个用于绘制的 canvas
+        ctx2 = canvas2.getContext('2d'); // 获取离屏 canvas 的 2D 绘图上下文
+      canvas2.width = 100; // 设置离屏 canvas 宽度为 100
+      canvas2.height = 100; // 设置离屏 canvas 高度为 100
+      let half = canvas2.width / 2, // 计算离屏 canvas 的半径
+        gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half); // 创建一个径向渐变
+      gradient2.addColorStop(0.025, '#fff'); // 添加渐变颜色停止点
+      gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)'); // 添加渐变颜色停止点
+      gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)'); // 添加渐变颜色停止点
+      gradient2.addColorStop(1, 'transparent'); // 添加渐变颜色停止点
+      ctx2.fillStyle = gradient2; // 设置填充样式为渐变
+      ctx2.beginPath(); // 开始绘制路径
+      ctx2.arc(half, half, half, 0, Math.PI * 2); // 绘制一个圆形
+      ctx2.fill(); // 填充圆形
+      // 离屏渲染逻辑 -- 结束
 
       function random(min, max) {
         if (arguments.length < 2) {
@@ -82,8 +81,8 @@
         this.timePassed = random(0, maxStars); // 用于控制星星在轨道上的相对位置
         this.speed = random(this.orbitRadius) / 50000; // 随机速度
         this.alpha = random(2, 10) / 10; // 随机透明度
-        count++;
-        stars[count] = this;
+        count++; // 标记增加
+        stars[count] = this; // 将当前星星实例存储到 stars 数组中
       };
 
       Star.prototype.draw = function () {
@@ -99,18 +98,21 @@
         }
 
         ctx.globalAlpha = this.alpha; // 用透明度模拟闪烁
-        // 绘制到画布上
+
+        // 将星星绘制到画布上，形状用离屏渲染的，星星大小通过改变整个 canvas2 的宽高实现调整
         ctx.drawImage(
           canvas2,
           x - this.radius / 2,
           y - this.radius / 2,
-          this.radius,
-          this.radius
+          this.radius, // 改变 canvas2 的宽
+          this.radius // 改变 canvas2 的高
         );
+
         // 更新 this.timePassed 的值，用于控制下次星星出现的位置，而增加值为当前星星的速度 this.speed
         this.timePassed += this.speed;
       };
 
+      // 创建 maxStars 个星星实例
       for (let i = 0; i < maxStars; i++) {
         new Star();
       }
