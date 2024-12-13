@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>curve 1</title>
+    <title>curve 3</title>
     <style>
       body {
         margin: 0%;
@@ -19,117 +19,118 @@
 
   <body>
     <script>
-      //Attention! My english is bad...  :D
       const config = {
-        curvesNum: 40,
-        waveSpeed: 0.5,
-        wavesToBlend: 4, //waves count to blend
-        framesToMove: 120, //frames count to change type placement
+        curvesNum: 40, // 曲线数量
+        waveSpeed: 0.5, // 波浪速度
+        wavesToBlend: 4, // 混合的波浪数量
+        framesToMove: 120, // 动画帧数
       };
 
       class WaveNoise {
         constructor() {
-          this.wavesSet = [];
+          this.wavesSet = []; // 存储随机角度的数组
         }
+        // 生成随机角度的波浪
         addWaves(requiredWaves) {
           for (let i = 0; i < requiredWaves; ++i) {
-            let randomAngle = Math.random() * 360; //generate random degree
-            this.wavesSet.push(randomAngle);
+            let randomAngle = Math.random() * 360; // 生成 0 到 360 之间的随机角度
+            this.wavesSet.push(randomAngle); // 将随机角度添加到 wavesSet 中
           }
         }
+        // 获取波浪的混合值
         getWave() {
           let blendedWave = 0;
           for (let e of this.wavesSet) {
-            blendedWave += Math.sin((e / 180) * Math.PI); //convert degree to radian and get sine
+            blendedWave += Math.sin((e / 180) * Math.PI); // 将角度转换为弧度并计算正弦值
           }
-          return (blendedWave / this.wavesSet.length + 1) / 2;
+          return (blendedWave / this.wavesSet.length + 1) / 2; // 返回混合后的波浪值，范围在 0 到 1 之间
         }
+        // 更新波浪的角度
         update() {
           this.wavesSet.forEach((e, i) => {
-            let r = Math.random() * (i + 1) * config.waveSpeed;
-            this.wavesSet[i] = (e + r) % 360;
+            let r = Math.random() * (i + 1) * config.waveSpeed; // 根据波浪速度和随机数计算增量
+            this.wavesSet[i] = (e + r) % 360; // 更新角度，确保角度在 0 到 360 之间
           });
         }
       }
 
       class Animation {
         constructor() {
-          this.cnv = null;
-          this.ctx = null;
-          this.size = { w: 0, h: 0, cx: 0, cy: 0 };
-          this.controls = [];
-          this.controlsNum = 3; //first for control x1 bezierCurve, second for control y1 (bc) and third for control x2 (bc)
-          this.frameCounter = 0;
-          this.type4Start = 0;
-          this.type4End = 0;
+          this.cnv = null; // 用于存储 canvas 元素
+          this.ctx = null; // 用于存储 canvas 的 2D 绘图上下文
+          this.size = { w: 0, h: 0, cx: 0, cy: 0 }; // 画布尺寸和中心点
+          this.controls = []; // 控制点集合
+          this.controlsNum = 3; // 控制点数量
+          this.frameCounter = 0; // 帧计数器
+          this.type4Start = 0; // 起点 y 坐标的类型
+          this.type4End = 0; // 终点 y 坐标的类型
         }
         init() {
-          //point of entry
-          this.createCanvas();
-          this.createControls();
-          this.updateAnimation();
+          this.createCanvas(); // 创建 canvas
+          this.createControls(); // 生成控制点集合
+          this.updateAnimation(); // 开始动画
         }
         createCanvas() {
-          this.cnv = document.createElement('canvas');
-          this.ctx = this.cnv.getContext('2d');
-          this.setCanvasSize();
-          document.body.appendChild(this.cnv);
-          window.addEventListener(`resize`, () => this.setCanvasSize());
+          this.cnv = document.createElement('canvas'); // 创建 canvas 元素
+          this.ctx = this.cnv.getContext('2d'); // 获取 2D 绘图上下文
+          this.setCanvasSize(); // 设置 canvas 尺寸
+          document.body.appendChild(this.cnv); // 将 canvas 添加到 body 中
+          window.addEventListener(`resize`, () => this.setCanvasSize()); // 监听窗口大小变化，动态调整 canvas 尺寸
         }
         setCanvasSize() {
-          this.size.w = this.cnv.width = window.innerWidth;
-          this.size.h = this.cnv.height = window.innerHeight;
-          this.size.cx = this.size.w / 2;
-          this.size.cy = this.size.h / 2;
+          this.size.w = this.cnv.width = window.innerWidth; // 设置 canvas 宽度为窗口宽度
+          this.size.h = this.cnv.height = window.innerHeight; // 设置 canvas 高度为窗口高度
+          this.size.cx = this.size.w / 2; // 计算画布中心 x 坐标
+          this.size.cy = this.size.h / 2; // 计算画布中心 y 坐标
         }
         createControls() {
           for (let i = 0; i < this.controlsNum + config.curvesNum; ++i) {
             // 3 general controls x1, y1, x2 bezierCurve
-            let control = new WaveNoise(); // and 1 personal control y2 for any bezierCurve
-            control.addWaves(config.wavesToBlend);
-            this.controls.push(control);
+            let control = new WaveNoise(); // 创建 WaveNoise 实例
+            control.addWaves(config.wavesToBlend); // 生成随机波浪
+            this.controls.push(control); // 将控制点添加到 controls 数组中
           }
         }
         updateControls() {
-          this.controls.forEach((e) => e.update());
+          this.controls.forEach((e) => e.update()); // 更新每个控制点的角度
         }
-        // get current type placement for Curve start and for Curve end
+        // 根据类型获取 y 坐标
         getYPlacementType(type, i) {
-          //type recorded in (this.type4Start, this.type4End) animation properties
           if (type > 0.6) {
-            return (this.size.h / config.curvesNum) * i;
+            return (this.size.h / config.curvesNum) * i; // 根据曲线数量计算 y 坐标
           } else if (type > 0.4) {
-            return this.size.cy;
+            return this.size.cy; // 返回画布中心 y 坐标
           } else if (type > 0.2) {
-            return this.size.h;
+            return this.size.h; // 返回画布底部 y 坐标
           } else {
-            return 0;
+            return 0; // 返回画布顶部 y 坐标
           }
         }
         updateCurves() {
           let c = this.controls;
-          let _controlX1 = c[0].getWave() * this.size.w; // general controls x1 for all curves
-          let _controlY1 = c[1].getWave() * this.size.h; // general controls y1 for all curves
-          let _controlX2 = c[2].getWave() * this.size.w; // general controls x2 for all curves
+          let _controlX1 = c[0].getWave() * this.size.w; // 计算第一个控制点的 x 坐标
+          let _controlY1 = c[1].getWave() * this.size.h; // 计算第一个控制点的 y 坐标
+          let _controlX2 = c[2].getWave() * this.size.w; // 计算第二个控制点的 x 坐标
 
           for (let i = 0; i < config.curvesNum; ++i) {
-            let _controlY2 = c[3 + i].getWave(); // personal control y2 for current curve
+            let _controlY2 = c[3 + i].getWave(); // 计算第二个控制点的 y 坐标
             let curveParam = {
-              startX: 0,
-              startY: this.getYPlacementType(this.type4Start, i),
-              controlX1: _controlX1,
-              controlY1: _controlY1,
-              controlX2: _controlX2,
-              controlY2: _controlY2 * this.size.h,
-              endX: this.size.w,
-              endY: this.getYPlacementType(this.type4End, i),
-              alpha: _controlY2,
-              hue: (360 / config.curvesNum) * i,
+              startX: 0, // 起点 x 坐标
+              startY: this.getYPlacementType(this.type4Start, i), // 起点 y 坐标
+              controlX1: _controlX1, // 第一个控制点 x 坐标
+              controlY1: _controlY1, // 第一个控制点 y 坐标
+              controlX2: _controlX2, // 第二个控制点 x 坐标
+              controlY2: _controlY2 * this.size.h, // 第二个控制点 y 坐标
+              endX: this.size.w, // 终点 x 坐标
+              endY: this.getYPlacementType(this.type4End, i), // 终点 y 坐标
+              alpha: _controlY2, // 透明度
+              hue: (360 / config.curvesNum) * i, // 色相值
             };
 
-            this.drawCurve(curveParam);
+            this.drawCurve(curveParam); // 绘制三次贝塞尔曲线
           }
         }
+        // 绘制三次贝塞尔曲线
         drawCurve({
           startX,
           startY,
@@ -142,10 +143,10 @@
           alpha,
           hue,
         }) {
-          this.ctx.lineWidth = 3;
-          this.ctx.strokeStyle = `hsla(${hue}, 100%, 50%, ${alpha})`;
-          this.ctx.beginPath();
-          this.ctx.moveTo(startX, startY);
+          this.ctx.lineWidth = 3; // 设置线条宽度
+          this.ctx.strokeStyle = `hsla(${hue}, 100%, 50%, ${alpha})`; // 设置线条颜色和透明度
+          this.ctx.beginPath(); // 开始绘制路径
+          this.ctx.moveTo(startX, startY); // 移动到起点
           this.ctx.bezierCurveTo(
             controlX1,
             controlY1,
@@ -153,32 +154,32 @@
             controlY2,
             endX,
             endY
-          );
-          this.ctx.stroke();
+          ); // 绘制三次贝塞尔曲线
+          this.ctx.stroke(); // 绘制线条
         }
         updateCanvas() {
-          this.ctx.fillStyle = `rgb(22, 22, 25)`;
-          this.ctx.fillRect(0, 0, this.size.w, this.size.h);
+          this.ctx.fillStyle = `rgb(22, 22, 25)`; // 设置填充颜色
+          this.ctx.fillRect(0, 0, this.size.w, this.size.h); // 清空画布并填充背景
         }
         updateFrameCounter() {
-          this.frameCounter = (this.frameCounter + 1) % config.framesToMove;
+          this.frameCounter = (this.frameCounter + 1) % config.framesToMove; // 更新帧计数器
           if (this.frameCounter === 0) {
-            this.type4Start = Math.random(); // change type for Curve Start
-            this.type4End = Math.random(); // change type for Curve End
+            this.type4Start = Math.random(); // 随机生成起点 y 坐标的类型
+            this.type4End = Math.random(); // 随机生成终点 y 坐标的类型
           }
         }
         updateAnimation() {
-          this.updateFrameCounter();
-          this.updateCanvas();
-          this.updateCurves();
-          this.updateControls();
+          this.updateFrameCounter(); // 更新帧计数器
+          this.updateCanvas(); // 清空画布
+          this.updateCurves(); // 更新并绘制曲线
+          this.updateControls(); // 更新控制点
 
-          window.requestAnimationFrame(() => this.updateAnimation());
+          window.requestAnimationFrame(() => this.updateAnimation()); // 递归调用，实现动画循环
         }
       }
 
       window.onload = () => {
-        new Animation().init();
+        new Animation().init(); // 页面加载完成后初始化动画
       };
     </script>
   </body>
