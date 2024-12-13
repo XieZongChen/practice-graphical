@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>curve 1</title>
+  </head>
+
+  <body>
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+    <script>
+      class Wave {
+        canvas = null; // 用于存储 canvas 元素
+        ctx = null; // 用于存储 canvas 的 2D 绘图上下文
+        amplitude = 50; // 波的振幅（高度）
+        frequency = 0.02; // 波的频率（周期性）
+        speed = 0.1; // 波的移动速度
+        yOffset = 0; // 波的偏移量，用于控制波的移动
+
+        constructor() {
+          this.initCanvas();
+          this.animateWave();
+        }
+
+        /**
+         * 初始化 canvas 和绘图上下文
+         */
+        initCanvas() {
+          this.canvas = document.getElementById('myCanvas');
+          this.ctx = this.canvas.getContext('2d');
+        }
+
+        /**
+         * 动画函数
+         */
+        animateWave = () => {
+          this.yOffset += this.speed; // 更新 yOffset，控制波浪的移动
+          this.drawWave(); // 绘制波浪
+          requestAnimationFrame(this.animateWave); // 递归调用，实现动画循环，RAF 保证帧率
+        };
+
+        /**
+         * 绘制波浪
+         */
+        drawWave() {
+          const { ctx, canvas, amplitude, frequency, speed, yOffset } = this;
+          ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空画布
+          ctx.beginPath(); // 开始绘制路径
+
+          var x = 0; // 初始 x 坐标
+          var y = canvas.height / 2; // 初始 y 坐标（画布中心）
+
+          ctx.moveTo(x, y); // 移动到初始点
+
+          // 使用 while 循环绘制波浪
+          while (x < canvas.width) {
+            x += 1; // 每次 x 增加 1，逐像素绘制
+            y =
+              canvas.height / 2 + // 波浪的中心位置
+              amplitude * Math.sin(frequency * x + yOffset); // 计算 y 坐标，使用正弦函数生成波浪
+            ctx.lineTo(x, y); // 绘制到当前点
+          }
+
+          ctx.strokeStyle = 'blue'; // 设置线条颜色为蓝色
+          ctx.lineWidth = 20; // 设置线条宽度为 20
+          ctx.stroke(); // 绘制波浪
+        }
+      }
+      const wave = new Wave();
+    </script>
+  </body>
+</html>

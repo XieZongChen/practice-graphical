@@ -201,3 +201,5 @@ content > h4 {
 - [使用 Web Worker 处理离屏渲染](https://xiezongchen.github.io/practice-graphical/canvas/off-screen-render4) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/off-screen-render4.html)
 
 - [实现一个星空例子特效](https://xiezongchen.github.io/practice-graphical/canvas/star) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/star.html)
+
+- [实现一个简单的正弦波动画](https://xiezongchen.github.io/practice-graphical/canvas/curve1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/curve1.html)
