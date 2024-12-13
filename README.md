@@ -203,3 +203,5 @@ content > h4 {
 - [实现一个星空例子特效](https://xiezongchen.github.io/practice-graphical/canvas/star) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/star.html)
 
 - [实现一个简单的正弦波动画](https://xiezongchen.github.io/practice-graphical/canvas/curve1) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/curve1.html)
+
+- [实现一个难度中等的曲线动画](https://xiezongchen.github.io/practice-graphical/canvas/curve2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/curve2.html)
