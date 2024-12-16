@@ -239,6 +239,7 @@
             );
             const x = this.options.padding + barIndex * barSize;
             const y = this.canvas.height - this.options.padding;
+
             if (this.barInfo.length < numberOfBars) {
               this.barInfo.push({ x, y, width: barSize, height: barHeight });
             }
@@ -251,7 +252,11 @@
               this.hoverId === barIndex
                 ? this.options.hoverColor
                 : this.colors[barIndex];
+
+            // 总生长时间
             this.t = Math.max(this.t - 0.01, 0);
+
+            // 生长动画时，每次帧渲染速率，柱子高度越高，速度越快
             const v = (barHeight / this.t) * 0.02;
 
             this.currentHeights[barIndex] = Math.min(
@@ -320,6 +325,7 @@
             this.drawLegend();
             this.firstRender = false;
           }
+          // title 受柱子生长动画影响，需要每帧重新渲染
           this.drawTitle();
           this.drawGridLines();
           this.drawBars();
