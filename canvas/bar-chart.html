@@ -138,12 +138,20 @@
             this.onMouseMove.bind(this)
           );
         }
+
+        /**
+         * 绘制图例
+         */
         drawLabels() {
           // 创建一个父容器元素
           this.labelContainer = document.createElement('div');
           this.labelContainer.id = 'label-warp';
           document.body.appendChild(this.labelContainer);
         }
+
+        /**
+         * 更新 labels
+         */
         updateLabels(cx, cy) {
           const dataList = Object.entries(this.options.data);
           if (this.hoverId >= 0) {
@@ -160,6 +168,10 @@
             this.labelContainer.style.visibility = 'hidden';
           }
         }
+
+        /**
+         * 监听鼠标移动事件
+         */
         onMouseMove(e) {
           const { clientX, clientY } = e;
           const cx = clientX;
@@ -177,6 +189,10 @@
           }
           this.updateLabels(clientX, clientY);
         }
+
+        /**
+         * 绘制网格线
+         */
         drawGridLines() {
           let gridValue = 0;
           while (gridValue <= this.maxValue) {
@@ -203,6 +219,10 @@
             gridValue += this.options.gridStep;
           }
         }
+
+        /**
+         * 绘制柱子
+         */
         drawBars() {
           // 用于计算 x 坐标
           let barIndex = 0;
@@ -222,7 +242,10 @@
             if (this.barInfo.length < numberOfBars) {
               this.barInfo.push({ x, y, width: barSize, height: barHeight });
             }
-            this.barInfo[barIndex].y = this.canvas.height - this.options.padding - barHeight;
+            // 在画布上，y 轴坐标是从上往下增大的，所以上边缘的 y 坐标是 画布底部 - 下边距 - 当前条形高度，这样才能确保我们得到的是矩形顶部的 y 值
+            this.barInfo[barIndex].y =
+              this.canvas.height - this.options.padding - barHeight;
+            // 该值在动画过程中会改变（模拟动画效果，高度逐渐增长直至到达目标高度），所以需要持续更新这个属性，以确保鼠标悬停检测使用的是最新的条形图高度数据
             this.barInfo[barIndex].height = this.currentHeights[barIndex];
             const color =
               this.hoverId === barIndex
@@ -249,6 +272,10 @@
             barIndex++;
           }
         }
+
+        /**
+         * 绘制 title
+         */
         drawTitle() {
           this.ctx.save();
           this.ctx.textBaseline = 'bottom';
@@ -265,6 +292,10 @@
           this.ctx.fillText(this.options.seriesName, xPos, this.canvas.height);
           this.ctx.restore();
         }
+
+        /**
+         * 绘制图例
+         */
         drawLegend() {
           let pIndex = 0;
           let legend = document.querySelector("legend[for='myCanvas']");
@@ -281,6 +312,7 @@
             pIndex++;
           }
         }
+
         draw() {
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
           if (this.firstRender) {
@@ -294,6 +326,7 @@
           requestAnimationFrame(this.draw.bind(this));
         }
       }
+      
       const myBarChart = new BarChart({
         canvas: myCanvas, // 绘制柱状图的 Canvas 元素
         seriesName: 'fruit shop', // 柱状图的系列名称
