@@ -84,14 +84,13 @@
 
       // 绘制线段
       function drawLine(ctx, startX, startY, endX, endY, color) {
-        // 存储状态
-        ctx.save();
+        ctx.save(); // 保存当前的绘图状态
         ctx.strokeStyle = color;
         ctx.lineWidth = 0.2;
-        ctx.beginPath();
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
+        ctx.beginPath(); // 开始绘制路径
+        ctx.moveTo(startX, startY); // 起始点
+        ctx.lineTo(endX, endY); // 终点
+        ctx.stroke(); // 进行绘制
         // 回退到刚绘制的状态，防止样式等影响其他绘图
         ctx.restore();
       }
@@ -106,7 +105,7 @@
       ) {
         ctx.save();
         ctx.fillStyle = color;
-        ctx.fillRect(upperLeftCornerX, upperLeftCornerY, width, height);
+        ctx.fillRect(upperLeftCornerX, upperLeftCornerY, width, height); // 绘制矩形，指定左上角的坐标、宽度和高度
         ctx.restore();
       }
 
