@@ -207,3 +207,5 @@ content > h4 {
 - [实现一个难度中等的曲线动画](https://xiezongchen.github.io/practice-graphical/canvas/curve2) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/curve2.html)
 
 - [实现一个还算复杂的曲线动画](https://xiezongchen.github.io/practice-graphical/canvas/curve3) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/curve3.html)
+
+- [实现柱状图](https://xiezongchen.github.io/practice-graphical/canvas/bar-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/bar-chart.html)
