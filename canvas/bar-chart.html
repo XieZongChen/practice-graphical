@@ -316,17 +316,17 @@
         draw() {
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
           if (this.firstRender) {
-            this.drawTitle();
             this.drawLabels();
             this.drawLegend();
             this.firstRender = false;
           }
+          this.drawTitle();
           this.drawGridLines();
           this.drawBars();
           requestAnimationFrame(this.draw.bind(this));
         }
       }
-      
+
       const myBarChart = new BarChart({
         canvas: myCanvas, // 绘制柱状图的 Canvas 元素
         seriesName: 'fruit shop', // 柱状图的系列名称
