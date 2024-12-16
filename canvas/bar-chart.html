@@ -38,7 +38,6 @@
 
     #myCanvasWarp {
       width: 500px;
-      margin-left: 30px;
     }
 
     #label-warp {
@@ -223,6 +222,8 @@
             if (this.barInfo.length < numberOfBars) {
               this.barInfo.push({ x, y, width: barSize, height: barHeight });
             }
+            this.barInfo[barIndex].y = this.canvas.height - this.options.padding - barHeight;
+            this.barInfo[barIndex].height = this.currentHeights[barIndex];
             const color =
               this.hoverId === barIndex
                 ? this.options.hoverColor
