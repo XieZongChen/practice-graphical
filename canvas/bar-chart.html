@@ -294,23 +294,26 @@
         }
       }
       const myBarChart = new BarChart({
-        canvas: myCanvas,
-        seriesName: 'fruit shop',
-        padding: 30,
-        gridStep: 5,
-        gridColor: 'black',
+        canvas: myCanvas, // 绘制柱状图的 Canvas 元素
+        seriesName: 'fruit shop', // 柱状图的系列名称
+        padding: 30, // 柱状图的边距
+        gridStep: 5, // 网格线的步长
+        gridColor: 'black', // 网格线的颜色
         data: {
+          // 柱状图的数据，以键值对的形式表示
           Banana: 16,
           Apple: 12,
           Orange: 20,
           Strawberry: 3,
         },
-        hoverColor: 'red',
-        colors: ['#5470C6', '#91CC75', '#fac858', '#ee6666'],
+        hoverColor: 'red', // 柱状图的悬停颜色
+        colors: ['#5470C6', '#91CC75', '#fac858', '#ee6666'], // 柱状图的颜色数组
         titleOptions: {
-          align: 'center',
-          fill: 'black',
+          // 标题的配置选项
+          align: 'center', // 对齐方式
+          fill: 'black', // 填充颜色
           font: {
+            // 字体样式
             weight: 'bold',
             size: '18px',
             family: 'Lato',
