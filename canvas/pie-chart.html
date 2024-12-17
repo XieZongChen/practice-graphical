@@ -72,10 +72,10 @@
         ctx.arc(centerX, centerY, radius, startAngle, endAngle);
         ctx.closePath();
         if (shadow) {
-          ctx.shadowBlur = 20;
-          ctx.shadowOffsetX = 0;
-          ctx.shadowOffsetY = 0;
-          ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+          ctx.shadowBlur = 20; // 设置阴影颜色为半透明的黑色
+          ctx.shadowOffsetX = 0; // 设置阴影的模糊半径为 10 像素
+          ctx.shadowOffsetY = 0; // 设置阴影在水平方向上的偏移量为 2 像素
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'; // 设置阴影在垂直方向上的偏移量为 2 像素
         }
         ctx.fill();
         ctx.restore();
@@ -99,6 +99,9 @@
         ctx.stroke();
       }
 
+      /**
+       * 判断坐标和圆形是否碰撞
+       */
       function checkCollision(x, y, circleX, circleY, radius) {
         const distance = Math.sqrt(
           Math.pow(circleX - x, 2) + Math.pow(circleY - y, 2)
@@ -145,9 +148,9 @@
           const { clientX, clientY } = e;
           const cx = clientX - this.canvas.offsetLeft;
           const cy = clientY - this.canvas.offsetTop;
-
           const centerX = myCanvas.width / 2;
           const centerY = myCanvas.height / 2;
+
           // 计算鼠标样式
           this.isHover = checkCollision(cx, cy, centerX, centerY, this.radius);
           document.body.style.cursor = this.isHover ? 'pointer' : 'default';
@@ -166,8 +169,9 @@
           let oldAngle = 0;
           for (let k in this.options.data) {
             let val = this.options.data[k];
-            let newAngle = oldAngle + (val / 100) * 360; //每块的角度
+            let newAngle = oldAngle + (val / 100) * 360; // 每块的角度
             if (oldAngle < deg && deg < newAngle) {
+              // 连续 hover 重置 r 来实现过渡
               if (this.hoverId !== index) {
                 this.r = this.radius;
               }
@@ -178,6 +182,10 @@
           }
           this.deg = deg;
         }
+
+        /**
+         * 根据 v 做速率变化控制 r 的动态半径，用于绘制鼠标 hover 时扇形的弹性效果
+         */
         setV() {
           this.t = Math.max(this.t - 0.06, 2);
           const v = this.v * this.t;
@@ -269,6 +277,7 @@
         }
 
         drawLabels() {}
+
         draw() {
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
           this.drawSlices();
