@@ -63,6 +63,7 @@ export default class KlineChart {
     /** y 轴label的差值 */
     yLabelDiff: 0,
   };
+
   /** 事件相关数据 */
   event = {
     /** 鼠标位置 */
@@ -292,6 +293,7 @@ export default class KlineChart {
     this.event.downPointer.x = e.clientX;
     this.event.downPointer.y = e.clientY;
   }
+
   onMouseup(e) {
     this.event.upPointer.x = e.clientX;
     this.event.upPointer.y = e.clientY;
@@ -323,6 +325,7 @@ export default class KlineChart {
       }
     }
   }
+
   watchEvent() {
     this.firstInto = false;
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
@@ -338,6 +341,10 @@ export default class KlineChart {
     window.removeEventListener('wheel', this.onWheel.bind(this));
   }
 
+  /**
+   * 限制 option 数据
+   * - 将 data 数据做分割，方便滚动事件做缩放数据范围的处理
+   */
   limitArea() {
     const { start, end } = this.view;
     const start_id = Math.floor((start * this.kLen) / 100);
@@ -368,14 +375,13 @@ export default class KlineChart {
     this.view.width = this.view.rb.x - this.view.lb.x;
     this.view.height = this.view.rt.y - this.view.rb.y;
 
-    // 计算 y 轴的范围值
+    // 计算 y 轴的范围值，之所以是范围值，是因为在 Y 轴的值是随时变化的，需要缩放值映射到 0 到 100 的范围
     this.view.kList.forEach((item) => {
       max_value = Math.max(max_value, ...item);
       min_value = Math.min(min_value, ...item);
     });
     this.view.yMaxSafeVal = max_value;
     this.view.yMinSafeVal = min_value;
-
     const min_integer = Math.floor(min_value - (min_value % 10));
     const max_integer = Math.floor(max_value + (10 - (max_value % 10)));
     this.view.yMinVal = min_integer - distance;
@@ -383,7 +389,7 @@ export default class KlineChart {
     this.view.yAreaVal = this.view.yMaxVal - this.view.yMinVal;
     const size = Math.floor(this.view.yAreaVal / step);
 
-    // 计算y的label集合
+    // 计算 y 的 label 集合
     let yLabels = [this.view.yMinVal];
     let curY = this.view.yMinVal;
     for (let i = 0; i < step; i++) {
@@ -405,6 +411,7 @@ export default class KlineChart {
       xTicks.push(+(index * xDivide + this.view.lb.x).toFixed(2));
     });
     this.view.xTicksSum = xTicks;
+
     // 兼容 x 轴挤占问题
     const calcXTicks = (xTicks) => {
       let ticksLen = xTicks.length;
@@ -508,11 +515,13 @@ export default class KlineChart {
     ctx.fillStyle = theme.bgColor;
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // 限制option数据
+
+    // 限制 option 数据
     this.limitArea();
 
     // 计算视口数据
     this.calcView();
+
     // 执行一次监听事件
     if (firstInto) this.watchEvent();
 
