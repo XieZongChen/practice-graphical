@@ -159,17 +159,28 @@ export default class KlineChart {
     const { ctx } = this;
     const { xTicks, lb, filterTimes } = this.view;
     const { theme } = this.option;
+
+    // 1.绘制刻度
+    // xTick: x 轴的刻度 x 坐标值的集合
     xTicks.forEach((x) => {
       ctx.beginPath();
       ctx.moveTo(x, lb.y);
       ctx.lineTo(x, lb.y - 10);
       ctx.stroke();
     });
+
+    /**
+     * 为了让翻转行为不影响之后的上下文绘制，
+     * 所以在翻转之前先 ctx.save 保存状态到栈顶，
+     * 然后在翻转之后 ctx.restore 恢复到存储在栈顶的状态
+     */
     ctx.save();
-    // 垂直翻转
+    // 垂直翻转，解决文字倒置的问题
     ctx.scale(1, -1);
+    // 2. 绘制标注
     xTicks.forEach((x, index) => {
       ctx.fillStyle = theme.textColor;
+      // -(lb.y - 20) 对绘制文本的 view.lb.y 取反，解决文字倒置的问题
       ctx.fillText(filterTimes[index], x - 25, -(lb.y - 20));
     });
     ctx.restore();
@@ -184,11 +195,19 @@ export default class KlineChart {
     const { theme } = this.option;
 
     const divide = height / (yLabels.length - 1);
+
+    /**
+     * 为了让翻转行为不影响之后的上下文绘制，
+     * 所以在翻转之前先 ctx.save 保存状态到栈顶，
+     * 然后在翻转之后 ctx.restore 恢复到存储在栈顶的状态
+     */
     ctx.save();
-    // 垂直翻转
+    // 垂直翻转，解决文字倒置的问题
     ctx.scale(1, -1);
+    // 绘制标注
     yLabels.forEach((val, index) => {
       ctx.fillStyle = theme.textColor;
+      // -(lb.y + index * divide - 3) 对绘制文本的 view.lb.y 取反，解决文字倒置的问题
       ctx.fillText(val, 10, -(lb.y + index * divide - 3));
     });
     ctx.restore();

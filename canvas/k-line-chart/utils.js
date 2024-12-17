@@ -30,6 +30,9 @@ export function removeOddIndexItems(arr) {
   return arr.filter((_, index) => index % 2 === 0);
 }
 
+/**
+ * 绘制文本
+ */
 export function drawText(ctx, val, x, y, { color, fontSize }) {
   ctx.save();
   ctx.scale(1, -1);
