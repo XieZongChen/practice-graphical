@@ -5,7 +5,7 @@ import {
   drawText,
   drawCurve,
   drawPolyline,
-} from './utils';
+} from './utils.js';
 
 export default class KlineChart {
   /** 时间集合 */
