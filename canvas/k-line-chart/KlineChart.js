@@ -296,6 +296,7 @@ export default class KlineChart {
     let candleCenters = [];
     this.view.kList.forEach((item, index) => {
       const { center } = this.drawCandle(item, this.view.times[index]);
+      // 收集蜡烛实体的中心坐标，方便辅助线的绘制
       candleCenters.push(center);
     });
     this.view.candleCenters = candleCenters;
@@ -489,7 +490,9 @@ export default class KlineChart {
     });
   }
 
-  // y 数值转为y轴坐标
+  /**
+   * y 数值转为 y 轴坐标
+   */
   y_toPos(val) {
     const { height, yAreaVal, yMinSafeVal, yMaxSafeVal, yMinVal, yMaxVal, lb } =
       this.view;
@@ -500,13 +503,18 @@ export default class KlineChart {
       (height - safeBottomH - safeTopH);
     return +(lb.y + safeBottomH + valH).toFixed(2);
   }
-  // y轴坐标转为 y 数值
+
+  /**
+   * y 轴坐标转为 y 数值
+   */
   pos_toY(val) {
     const { yLabelDiff, yLabels } = this.view;
     return (val / this.view.height) * yLabelDiff + yLabels[0];
   }
 
-  // x 数值转为x轴坐标
+  /**
+   * x 数值转为x轴坐标
+   */
   x_toPos(name) {
     let { times, width, kLen, lb } = this.view;
     const idx = times.findIndex((item) => item === name);
@@ -514,11 +522,14 @@ export default class KlineChart {
     return +(lb.x + x_divide * idx).toFixed(2);
   }
 
+  /**
+   * 绘制蜡烛
+   */
   drawCandle(item, name) {
     const { ctx } = this;
     const { theme } = this.option;
 
-    // 缩放后的 实心底部， 实心顶部，lowest，highest的y值
+    // 缩放后的 实心底部，实心顶部，lowest，highest 的 y 值
     const solidBottom = Math.min(this.y_toPos(item[0]), this.y_toPos(item[1]));
     const solidTop = Math.max(this.y_toPos(item[0]), this.y_toPos(item[1]));
     const lowest = this.y_toPos(item[2]);

@@ -43,6 +43,9 @@ export function drawText(ctx, val, x, y, { color, fontSize }) {
   ctx.restore();
 }
 
+/**
+ * 
+ */
 export function drawPolyline(ctx, points, color, lineWidth) {
   ctx.beginPath();
   ctx.strokeStyle = color;
