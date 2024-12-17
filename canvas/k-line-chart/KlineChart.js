@@ -75,6 +75,7 @@ export default class KlineChart {
   };
 
   constructor(option) {
+    // 解析 option，方便获取数据
     this.option = option;
     this.times = option.xAxis.data;
     this.kList = option.series[0].data;
@@ -85,18 +86,29 @@ export default class KlineChart {
     this.init();
     this.render();
   }
+
+  /**
+   * 初始化 canvas 并记录相关数据
+   */
   init() {
+    // 获取上下文
     const canvas = document.getElementById('myCanvas');
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.width = canvas.width;
     this.height = canvas.height;
 
+    // dpr 适配，为了解决高清屏的尺寸模糊问题
     const dpr = window.devicePixelRatio || 1;
     canvas.width = canvas.width * dpr;
     canvas.height = canvas.height * dpr;
 
-    // 原点设置为左下角
+    /**
+     * 原点设置为左下角
+     * - canvas 默认是屏幕坐标系，也就是原点在左上角，右侧为 x 轴的正轴，下侧为 y 轴的正轴。
+     * - 但为了使用笛卡尔坐标系更舒服，需要左下角为原点，右侧为 x 轴的正轴，上侧为 y 轴的正轴。
+     * - 这实际就是镜像翻转。但同时镜像翻转会带来一个问题 —— 文字倒置，需要在对应地方进行特殊处理。
+     */
     canvas.style.transform = 'scaleY(-1)';
     canvas.style.transform = `translate(${canvas.width})`;
   }

@@ -118,6 +118,7 @@ function calculateMA(dayCount) {
   }
   return result;
 }
+
 const option = {
   grid: { left: 40, right: 40, bottom: 15, top: 20 },
   xAxis: {
