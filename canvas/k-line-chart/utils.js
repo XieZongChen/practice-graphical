@@ -13,6 +13,9 @@ export function findClosestId(arr, value) {
   return { id: closestId, x: arr[closestId] };
 }
 
+/**
+ * 绘制线段图元
+ */
 export function drawLine(ctx, x, y, X, Y, color = '#fff') {
   ctx.strokeStyle = color;
   ctx.lineWidth = 1;

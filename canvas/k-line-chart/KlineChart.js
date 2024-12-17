@@ -115,17 +115,17 @@ export default class KlineChart {
   }
 
   draw() {
-    /** 绘制X轴 */
+    /** 绘制 X 轴 */
     this.drawAxisX();
-    /** 绘制Y轴 */
+    /** 绘制 Y 轴 */
     this.drawAxisY();
-    /** 绘制X比例尺 */
+    /** 绘制 X 比例尺 */
     this.drawScaleX();
-    /** 绘制Y比例尺 */
+    /** 绘制 Y 比例尺 */
     this.drawScaleY();
     /** 绘制网格线 */
     this.drawGrid();
-    /** 绘制k线 */
+    /** 绘制 k 线 */
     this.drawK();
     /** 绘制均线 */
     this.drawAveLine();
@@ -133,12 +133,18 @@ export default class KlineChart {
     this.drawHelpLine();
   }
 
+  /**
+   * 绘制 X 轴
+   */
   drawAxisX() {
     const { lb, rb } = this.view;
     const { theme } = this.option;
     drawLine(this.ctx, lb.x, lb.y, rb.x, rb.y, theme.bgLineColor);
   }
 
+  /**
+   * 绘制 Y 轴
+   */
   drawAxisY() {
     const { lb, lt, rb } = this.view;
     const { theme } = this.option;
@@ -146,6 +152,9 @@ export default class KlineChart {
     drawLine(this.ctx, rb.x, lb.y, rb.x, lt.y, theme.bgLineColor);
   }
 
+  /**
+   * 绘制 X 比例尺
+   */
   drawScaleX() {
     const { ctx } = this;
     const { xTicks, lb, filterTimes } = this.view;
@@ -166,6 +175,9 @@ export default class KlineChart {
     ctx.restore();
   }
 
+  /**
+   * 绘制 Y 比例尺
+   */
   drawScaleY() {
     const { ctx } = this;
     const { lb, height, yLabels } = this.view;
@@ -182,6 +194,9 @@ export default class KlineChart {
     ctx.restore();
   }
 
+  /**
+   * 绘制网格线
+   */
   drawGrid() {
     const { lb, rb, yLabels } = this.view;
     const { theme } = this.option;
@@ -194,6 +209,9 @@ export default class KlineChart {
     });
   }
 
+  /**
+   * 绘制辅助线
+   */
   drawHelpLine() {
     const { ctx } = this;
     const { lb, lt, rt, rb, candleCenters, times } = this.view;
@@ -252,6 +270,9 @@ export default class KlineChart {
     }
   }
 
+  /**
+   * 绘制 k 线
+   */
   drawK() {
     let candleCenters = [];
     this.view.kList.forEach((item, index) => {
@@ -261,6 +282,9 @@ export default class KlineChart {
     this.view.candleCenters = candleCenters;
   }
 
+  /**
+   * 绘制均线
+   */
   drawAveLine() {
     this.view.series.forEach((item) => {
       drawCurve(this.ctx, item.lines, item.lineStyle.color, 1);
