@@ -44,7 +44,13 @@ export function drawText(ctx, val, x, y, { color, fontSize }) {
 }
 
 /**
- * 
+ * 绘制折线
+ * - const points = [
+ *  [50, 50],
+ *  [100, 150],
+ *  [200, 100],
+ *  [250, 200]
+ * ]
  */
 export function drawPolyline(ctx, points, color, lineWidth) {
   ctx.beginPath();
@@ -57,6 +63,15 @@ export function drawPolyline(ctx, points, color, lineWidth) {
   ctx.stroke();
 }
 
+/**
+ * 绘制曲线
+ * - const points = [
+ *  [50, 50],
+ *  [100, 150],
+ *  [200, 100],
+ *  [250, 200]
+ * ]
+ */
 export function drawCurve(ctx, points, color, lineWidth) {
   ctx.beginPath();
   ctx.strokeStyle = color;
