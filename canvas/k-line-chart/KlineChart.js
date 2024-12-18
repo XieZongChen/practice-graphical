@@ -356,6 +356,7 @@ export default class KlineChart {
   }
 
   onWheel(e) {
+    // 获取滚轮滚动的方向，使用 Math.sign() 函数可以将滚轮滚动的垂直方向速度转换为一个正负值，正值表示向上滚动（放大），负值表示向下滚动（缩小）
     const delta = Math.sign(event.deltaY);
     if (delta > 0) {
       console.log('放大数据');
