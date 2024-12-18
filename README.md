@@ -211,3 +211,5 @@ content > h4 {
 - [实现柱状图](https://xiezongchen.github.io/practice-graphical/canvas/bar-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/bar-chart.html)
 
 - [实现饼图](https://xiezongchen.github.io/practice-graphical/canvas/pie-chart) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/pie-chart.html)
+
+- [实现 k 线图](https://xiezongchen.github.io/practice-graphical/canvas/k-line-chart/index.html) | [实现代码](https://github.com/XieZongChen/practice-graphical/blob/main/canvas/k-line-chart/index.html)
