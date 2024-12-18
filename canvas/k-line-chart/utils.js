@@ -26,6 +26,10 @@ export function drawLine(ctx, x, y, X, Y, color = '#fff') {
   ctx.closePath();
 }
 
+/**
+ * 将数组偶数位的值拿出新建一个数组
+ * - 注意，数组 index 是从 0 开始，偶数位 index 即为 0、2、4...
+ */
 export function removeOddIndexItems(arr) {
   return arr.filter((_, index) => index % 2 === 0);
 }
