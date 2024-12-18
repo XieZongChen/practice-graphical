@@ -1,3 +1,6 @@
+/**
+ * 找到一个数值在数组中最小差值的项
+ */
 export function findClosestId(arr, value) {
   let minDiff = Math.abs(arr[0] - value);
   let closestId = 0;

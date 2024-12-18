@@ -243,7 +243,7 @@ export default class KlineChart {
       const X = pointer.x + grid.left;
       const Y = pointer.y - grid.top;
 
-      // 临进计算
+      // 辅助线只会依附在最近的实体，所以需要临进计算
       const { id, x } = findClosestId(xCandles, X);
       this.event.activeId = id;
       // 计算实际源数据
@@ -509,6 +509,7 @@ export default class KlineChart {
    * y 轴坐标转为 y 数值
    */
   pos_toY(val) {
+    // 根据视口比例换算到实际数值
     const { yLabelDiff, yLabels } = this.view;
     return (val / this.view.height) * yLabelDiff + yLabels[0];
   }
