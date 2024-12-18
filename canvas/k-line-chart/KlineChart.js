@@ -68,8 +68,8 @@ export default class KlineChart {
   event = {
     /** 鼠标位置 */
     pointer: { x: 0, y: 0 },
-    downPointer: { x: 0, y: 0 },
-    upPointer: { x: 0, y: 0 },
+    downPointer: { x: 0, y: 0 }, // 按下位置
+    upPointer: { x: 0, y: 0 }, // 抬起位置
     inner: false,
     activeId: -1,
     activeOriginData: null,
